@@ -1,0 +1,371 @@
+{% extends 'post_view.html' %}
+
+{% block title %}New Post – {% endblock %}
+
+{% block styles %} 
+{% load static %} 
+<link href="{% static 'css/customcheckboxes.css' %}" rel="stylesheet" />
+<link href="{% static 'css/multiselectimages.css' %}" rel="stylesheet" />
+{% endblock %}  
+
+{% block content %}
+
+<div class="d-flex justify-content-around content-wrapper">
+  <div class="card profileedit-card-size">
+    <div class="row g-0 newpost-card-row">
+      <div class="col">
+        <button id="back" data-bs-toggle="tooltip" data-bs-custom-class="custom-tooltip" data-bs-placement="right" data-bs-title="Back" class="btn mx-2 hBack">
+            <i class="fa-solid fa-arrow-left"></i>
+        </button>
+        <!-- form start =============================================================================================== -->        
+        {% block form %}
+        <form method="post" action="{% url 'create_post' %}" enctype="multipart/form-data" onsubmit="return validateForm();"> <!-- id="formPostNew" -->
+            {% csrf_token %}
+            <div class="card-body-sm rounded">
+                <div class="d-flex justify-content-center pt-3 pb-1">                    
+                    <div class="page-header-title__small">
+                        <b>New</b> Post
+                    </div>
+                </div>
+                
+                <div class="d-flex align-items-center">
+                    <!--
+                    <div class="project-card-img position-relative d-flex align-items-center">
+                        <img src="https://crochet-news.com/wp-content/uploads/2019/12/crochet-leaf-pattern-7.png" class="object-fit-cover border rounded h-auto w-100" alt="...">
+                    </div>         
+                    --> 
+                    <div class="d-flex justify-content-between pt-3 flex-grow-1">
+                        <div class="w-100">
+                            <small class="text-body-secondary">
+                                <span class="post-body-text"> <!--post name-->
+                                    <div class="mb-1">
+                                        <label for="images" class="form-label label__sm">Upload Images <small class="text-muted-color">(required, max. 3)</small></label>
+                                        <input type="file" class="form-control" id="images" name="images[]" multiple accept="image/*" required>
+                                        
+                                        <!-- Placeholder for error message -->
+                                        {% if error_message %}
+                                        <small class="error-message mt-3">{{ error_message|striptags|slice:"2:"|slice:"0:-2" }}</small>
+                                        {% endif %}
+                                    </div>
+                                </span>
+                            </small>
+                        </div>
+                    </div>     
+                </div>        
+                <div class="d-flex align-items-center w-100">
+                    <div id="image_preview" class="d-flex justify-content-center align-items-center w-100"></div>
+                </div>                          
+                    
+                <div class="post-body-div">
+                    <small class="text-body-secondary">
+                        <span class="post-body-text"> <!--post name-->
+                            <div class="mb-1">
+                                <label for="postname" class="form-label label__sm" >Post Title <small class="text-muted-color">(required)</small></label>
+                                <input type="text" class="form-style form-text d-inline" name="title" id="postname" maxlength="100" required>
+                            </div>
+                        </span>
+                    </small>
+                    <small class="text-body-secondary">
+                        <span class="post-body-text"> <!--post description-->
+                            <div class="mb-1">
+                                <label for="postdescription" class="form-label label__sm" >Post Description</label>
+                                <textarea class="form-style" id="postdescription" name="description" maxlength="500" rows="15"></textarea>
+                            </div>
+                        </span>
+                    </small>
+                    <small class="text-body-secondary">
+                        <span class="post-body-text"> <!--post difficulty-->
+                            <div class="mb-1">
+                                <label for="difficultySelect" class="form-label label__sm" >Difficulty</label>
+                                <select id="difficultySelect" class="form-select form-select-sm d-inline" name="skill_level">     
+                                    <option value="beginner" style="font-family:'Verdana'; font-size:12px" selected>beginner</option>                           
+                                    <option value="novice" style="font-family:'Verdana'; font-size:12px">novice</option>
+                                    <option value="intermediate" style="font-family:'Verdana'; font-size:12px">intermediate</option>
+                                    <option value="expert" style="font-family:'Verdana'; font-size:12px">expert</option>
+                                    <option value="master" style="font-family:'Verdana'; font-size:12px">master</option>
+                                </select>  
+                            </div>
+                        </span>
+                    </small>
+                    <small class="text-body-secondary">
+                        <span class="post-body-text"> <!--post tags-->
+                            <div class="mb-0">
+                                <label for="postname" class="form-label label__sm">Project Type</label>
+                                <div class="select-btn-preferences">
+                                    <span class="btn-text" id="tagsSelect"></span>
+                                    <span class="arrow-dwn">
+                                        <i class="fa-solid fa-chevron-down"></i>
+                                    </span>
+                                </div>
+                                
+                                <ul class="list-items-preferences">
+                                    <span class="preferences-label-muted">Wearables</span>
+                                    <div class="boxes-profileedit tagCheckboxGroup">
+                                        <input type="checkbox" class="tagCheckbox" name="preferred_projects" id="hats" value="hats">
+                                        <label for="hats">Hats</label>
+                                        
+                                        <input type="checkbox" class="tagCheckbox" name="preferred_projects" id="clothes" value="clothes">
+                                        <label for="clothes">Clothes</label>
+                                        
+                                        <input type="checkbox" class="tagCheckbox" name="preferred_projects" id="scarves" value="scarves">
+                                        <label for="scarves">Scarves</label>
+                                        
+                                        <input type="checkbox" class="tagCheckbox" name="preferred_projects" id="socks" value="socks">
+                                        <label for="socks">Socks</label>
+                                        
+                                        
+                                        <span class="preferences-label-muted">Home Decor</span>
+                                    
+                                        <input type="checkbox" class="tagCheckbox" name="preferred_projects" id="blankets" value="blankets">
+                                        <label for="blankets">Blankets</label>
+                                        
+                                        <input type="checkbox" class="tagCheckbox" name="preferred_projects" id="pillows" value="pillows">
+                                        <label for="pillows">Pillows</label>
+                                        
+                                        <input type="checkbox" class="tagCheckbox" name="preferred_projects" id="mats" value="mats">
+                                        <label for="mats">Mats</label>
+                                        
+                                        <input type="checkbox" class="tagCheckbox" name="preferred_projects" id="wallhangings" value="wall hangings">
+                                        <label for="wallhangings">Wall Hangings</label>
+                                        
+                                        <input type="checkbox" class="tagCheckbox" name="preferred_projects" id="baskets" value="baskets">
+                                        <label for="baskets">Baskets</label>
+                                    
+                                    
+                                        <span class="preferences-label-muted">Amigurumi & Toys</span>
+                                    
+                                        <input type="checkbox" class="tagCheckbox" name="preferred_projects" id="stuffedtoys" value="stuffed toys">
+                                        <label for="stuffedtoys">Stuffed Toys</label>
+                                        
+                                        <input type="checkbox" class="tagCheckbox" name="preferred_projects" id="dolls" value="dolls"> 
+                                        <label for="dolls">Dolls</label>
+                                    
+                                    
+                                        <span class="preferences-label-muted">Accessories</span>
+                                    
+                                        <input type="checkbox" class="tagCheckbox" name="preferred_projects" id="bags" value="bags">
+                                        <label for="bags">Bags</label>
+                                        
+                                        <input type="checkbox" class="tagCheckbox" name="preferred_projects" id="hairaccessories" value="hair accessories">
+                                        <label for="hairaccessories">Hair Accessories</label>
+                                        
+                                        <input type="checkbox" class="tagCheckbox" name="preferred_projects" id="jewelry" value="jewelry">
+                                        <label for="jewelry">Jewelry</label>
+                                    
+                                    
+                                        <span class="preferences-label-muted">Seasonal Decor</span>
+                                    
+                                        <input type="checkbox" class="tagCheckbox" name="preferred_projects" id="christmas" value="christmas">
+                                        <label for="christmas">Christmas</label>
+                                        
+                                        <input type="checkbox" class="tagCheckbox" name="preferred_projects" id="halloween" value="halloween">
+                                        <label for="halloween">Halloween</label>
+                                        
+                                        <input type="checkbox" class="tagCheckbox" name="preferred_projects" id="easter" value="easter">
+                                        <label for="easter">Easter</label>
+                                    
+                                    
+                                        <span class="preferences-label-muted">Other</span>
+                                    
+                                        <input type="checkbox" class="tagCheckbox" name="preferred_projects" id="keychains" value="keychains">
+                                        <label for="keychains">Keychains</label>
+                                        
+                                        <input type="checkbox" class="tagCheckbox" name="preferred_projects" id="mugcozies" value="mug cozies">
+                                        <label for="mugcozies">Mug Cozies</label>
+                                        
+                                        <input type="checkbox" class="tagCheckbox" name="preferred_projects" id="bottleholders" value="bottle holders">
+                                        <label for="bottleholders">Bottle Holders</label>
+                                        
+                                        <input type="checkbox" class="tagCheckbox" name="preferred_projects" id="flowers" value="flowers">
+                                        <label for="flowers">Flowers</label>
+                                        
+                                        <input type="checkbox" class="tagCheckbox" name="preferred_projects" id="grannysquares" value="granny squares">
+                                        <label for="grannysquares">Granny Squares</label>
+                                        
+                                        <input type="checkbox" class="tagCheckbox" name="preferred_projects" id="appliques" value="appliques">
+                                        <label for="appliques">Appliques</label>
+                                    </div>
+                                </ul>
+                            </div>
+                        </span>
+                    </small>
+                </div>
+                
+                <div class="col d-flex justify-content-center pt-1 pb-4">
+                    <div class="py-2">
+                        <a href="{% url 'feed' %}" id="cancelBtn">                            
+                            <div class="text-center btn-feed-style py-2 px-3 project-btn__md project-btn-tertiary__transparent btn-150 modbtn hBack">Cancel</div>
+                        </a>
+                    </div>
+                    <div class="py-2 ps-2">
+                        {% if post_id %}
+                            <a href="{% url 'viewpost' post_id=post_id %}">
+                                <button class="btn btn-feed-style" type="submit">
+                                    <div class="py-2 px-3 project-btn__md project-btn-primary btn-150 modbtn">Post</div>
+                                </button>
+                            </a>
+                        {% else %}
+                            <button class="btn btn-feed-style" type="submit">
+                                <div class="py-2 px-3 project-btn__md project-btn-primary btn-150 modbtn">Post</div>
+                            </button>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </form>    
+        {% endblock %}
+        <!-- form end =============================================================================================== -->
+      </div>      
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+
+{% block scripts %}
+<script src="/../static/js/lazyload.js"></script>
+<script src="/../static/js/validateimginput.js"></script>
+<script>
+    function validateForm() {
+        // Get values of required fields
+        var title = document.getElementById("postname").value.trim();
+        var images = document.getElementById("images").value.trim();
+
+        // Check if required fields are empty
+        if (title === "") {
+            alert("Please fill in all required fields.");
+            return false; // Prevent form submission
+        } else  if  (images === "") {
+            alert("Please upload at least one image.");
+            return false; // Prevent form submission
+        }
+
+        return true; // Allow form submission
+    }
+    
+    // Function to show the confirmation modal
+    function showConfirmationModal() {
+        $('#confirmationModal').modal('show');
+        return true;
+    }
+
+    // Set the onbeforeunload event handler
+    window.onbeforeunload = showConfirmationModal;
+
+    // Handle the "Leave" button click event
+    $('#leavePage').on('click', function() {
+        $('#confirmationModal').modal('hide');
+        window.onbeforeunload = null; // Remove the confirmation modal when the user decides to leave
+    });
+
+    // Add a listener to prevent the confirmation modal on form submit
+    $('form').on('submit', function() {
+        window.onbeforeunload = null; // Remove the confirmation modal when the form is submitted
+    });
+    
+    
+    
+// session storage
+
+function updateSessionStorage(formId) {
+    const formElements = document.getElementById(formId).elements;
+
+    for (let i = 0; i < formElements.length; i++) {
+        const element = formElements[i];
+
+        if (element.name && element.type !== 'button' && element.type !== 'submit') {
+            const storageKey = `${formId}_${element.name}`;
+            if (element.type === 'checkbox') {
+                // Handle multiselect checkboxes
+                if (!sessionStorage.getItem(storageKey)) {
+                    sessionStorage.setItem(storageKey, JSON.stringify([]));
+                }
+
+                const selectedValues = JSON.parse(sessionStorage.getItem(storageKey));
+                const index = selectedValues.indexOf(element.value);
+
+                if (element.checked && index === -1) {
+                    // Add value to array if checked and not already present
+                    selectedValues.push(element.value);
+                } else if (!element.checked && index !== -1) {
+                    // Remove value from array if unchecked and present
+                    selectedValues.splice(index, 1);
+                }
+
+                sessionStorage.setItem(storageKey, JSON.stringify(selectedValues));
+            } else if (element.type === 'radio' && element.checked) {
+                // Handle radio buttons - store only the selected value
+                sessionStorage.setItem(storageKey, element.value);
+            } else {
+                // Handle other input types
+                sessionStorage.setItem(storageKey, element.value);
+            }
+        }
+    }
+        const colorElements = document.querySelectorAll('.form-control-color');
+    
+        const colorArray = [];
+        colorElements.forEach((element, index) => {
+            colorArray[index] = element.value;
+        });
+    
+        sessionStorage.setItem('project_colors', JSON.stringify(colorArray));
+    }
+    
+    function populateForm(formId) {
+        const formElements = document.getElementById(formId).elements;
+    
+        for (let i = 0; i < formElements.length; i++) {
+            const element = formElements[i];
+    
+            if (element.name && element.type !== 'button' && element.type !== 'submit') {
+                const storageKey = `${formId}_${element.name}`;
+                if (element.type === 'checkbox') {
+                    // Populate multiselect checkboxes
+                    const selectedValues = JSON.parse(sessionStorage.getItem(storageKey)) || [];
+                    element.checked = selectedValues.includes(element.value);
+                } else {
+                    // Populate other input types
+                    element.value = sessionStorage.getItem(storageKey) || '';
+                }
+            }
+        }
+        
+        const colorArray = JSON.parse(sessionStorage.getItem('project_colors')) || [];
+        const colorElements = document.querySelectorAll('.form-control-color');
+    
+        colorElements.forEach((element, index) => {
+            element.value = colorArray[index] || '#ffffff'; // Set a default color if not present
+        });
+    }
+    
+    // Get the CSRF token value from the hidden input
+    var csrfToken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
+
+    // Store the CSRF token in session storage
+    sessionStorage.setItem('csrfmiddlewaretoken', csrfToken);
+    
+    document.querySelectorAll('.form-control-color').forEach(element => {
+        element.addEventListener('input', updateSessionStorage);
+    }); 
+    
+    document.getElementById('formPostNew').addEventListener('input', function () {
+        updateSessionStorage('formPostNew');
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        populateForm('formPostNew');
+        
+        document.getElementById('cancelBtn').addEventListener('click', function() {
+            // Clear session storage when cancel button is clicked
+            sessionStorage.clear();
+        });
+    });
+</script>
+
+<!-- multiselect -->
+<script src="/../static/js/profiletheme.js"></script>
+<script src="/../static/js/multiselectimages.js"></script>
+<script src="/../static/js/tagselectone.js"></script>
+{% endblock %}

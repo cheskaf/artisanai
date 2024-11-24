@@ -1,0 +1,286 @@
+{% extends 'base.html' %} 
+
+{% block title %}Home – {% endblock %}
+
+{% block nav1Active %}
+<a class="nav-link active" aria-current="page" href="{% url 'feed' %}">
+{% endblock %} 
+
+{% block content %}
+<input type="hidden" id="profiletheme" value="{{ user_profile_theme }}" />
+
+<div class="content-wrapper d-flex justify-content-around">
+  <!--feed toggle buttons-->
+  <div class="content-wrapper-width">
+    <div class="container-fluid padding-0">
+      <div class="row d-flex justify-content-between feed-header">
+        <div class="col d-flex justify-content-sm-start justify-content-start">
+          <div class="py-2">
+            <ul class="nav nav-pills feed-toggle__accent4" id="feed-tab" role="tablist">
+              <li class="nav-item" role="presentation">
+                  <button class="nav-link active" id="feed-discover-tab" data-bs-toggle="pill" data-bs-target="#feed-discover" type="button" role="tab" aria-controls="profile-home" aria-selected="true">
+                      Discover
+                  </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="feed-following-tab" data-bs-toggle="pill" data-bs-target="#feed-following" type="button" role="tab" aria-controls="profile-contact" aria-selected="false">
+                      Following
+                  </button>
+              </li>
+            </ul> 
+          </div>
+        </div>
+        <div class="col d-flex justify-content-sm-end justify-content-end">
+          <div class="py-2 padding-0">
+            <div class="d-flex justify-content-sm-end justify-content-end feed-toggle btn-a">
+              <a href="{% url 'create_post' %}">
+                <button class="btn">
+                  <div class="py-2 px-3 post-btn"><i class="fa-solid fa-file-circle-plus"></i> Post</div>
+                </button>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="group-profile-body d-flex flex-column justify-content-center align-items-center">
+      <div class="profile-body-content w-100">    
+          <div class="tab-content" id="feed-tabContent">
+              <div class="tab-pane fade show active" id="feed-discover" role="tabpanel" aria-labelledby="feed-discover-tab" tabindex="0">
+                  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4">
+                      <!-- DISCOVER start -->
+                      {% block discover %}
+                      {% if recomm_posts %}
+                        {% for post, first_image, postUserImage, liked_posts, like_counts in recomm_posts %}
+                        <!--post start-->
+                        <div class="col">
+                          <div class="card shadow h-100">
+                            <!--post img-->
+                              <a href="#" class="card-img-top">
+                                <img data-src="{{ first_image.post_image_path.url }}" class="card-img-top" alt="Post Image" />
+                              </a>
+                              <!--post body-->
+                            <div class="card-body rounded">
+                              <div class="d-flex h-100">
+                                <div class="py-2">
+                                  <div class="row">
+                                    <div class="col">
+                                        <a href="{% url 'profile' %}">
+                                          <img class="feedicon" src="{{ postUserImage.url }}" /> <!--post user icon-->
+                                        </a>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="p-2 h-100 flex-grow-1 d-flex flex-column justify-content-between">
+                                  <div class="wowowowow">
+                                    <div class="row">
+                                      <div class="col">
+                                        <a href="#">
+                                          <h5 class="card-title card-title-hover h5">{{ post.post_title }}</h5> <!--post title-->
+                                        </a>
+                                        <a href="{% url 'profile' %}">
+                                          <small class="text-body-secondary">
+                                            <span id="feed-username">@{{ post.post_user.username }}</span> <!--post username-->
+                                          </small>
+                                        </a> 
+                                      </div>
+                                    </div>
+                                    <div class="row row-tags">
+                                      <div class="col">
+                                        <small class="text-body-secondary">
+                                          <span class="feed-tag-group"> <!--post tags= group-->
+                                            {% for preference in post.post_preference %}
+                                              <a href="{% url 'browse' %}">
+                                                <span id="feed-tag" class="feed-tag">{{ preference }}</span>
+                                              </a>
+                                            {% endfor %}
+                                          </span>
+                                        </small>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col">
+                                      <small class="h7-size d-block text-muted-color">{{ post.posted_date }}</small>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="py-2 text-center">
+                                  <div class="row">
+                                    <div class="col">
+                                      <span id="feed-like-icon">
+                                        <button class="feed-like-button btn like-button" data-post-id="{{ post.pk }}" data-bs-toggle="tooltip" data-bs-custom-class="custom-tooltip" data-bs-placement="top" data-bs-title="Like"> <!--post like button-->
+                                          {% if post.postID in liked_posts %}
+                                            <i class="fa-solid fa-heart"></i>
+                                          {% else %}
+                                            <i class="fa-regular fa-heart"></i>
+                                          {% endif %}
+                                        </button>
+                                      </span>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col">
+                                      <small class="text-muted-color">
+                                        <span id="like-count-{{ post.pk }}">{{ like_counts }}</span> <!--post like counter-->
+                                      </small>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        {% endfor %}
+                      {% else %}
+                      <div class="mb-2 d-flex justify-content-md-start justify-content-center">
+                        <p class="h5-size">No posts found.</p>
+                      </div>
+                      {% endif %}
+                      <!--post end-->
+                      
+                      <!--post copypasted start -->    
+                      
+                      {% endblock %}  
+                      <!-- DISCOVER end -->
+                  </div>
+              </div>
+              
+              <div class="tab-pane fade" id="feed-following" role="tabpanel" aria-labelledby="feed-following-tab" tabindex="0">
+                  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4 w-100">
+                      <!-- FOLLOWING start -->
+                      {% block following %}
+                      <!--post start-->
+                      {% if following_posts %}
+                        {% for post, first_image, postUserImage, liked_posts, like_counts in following_posts %}
+                          <div class="col">
+                            <div class="card shadow h-100">
+                              <!--post img-->
+                                <a href="#" class="card-img-top">
+                                  <img data-src="{{ first_image.post_image_path.url }}" class="card-img-top" alt="Post Image" />
+                                </a>
+                              <!--post body-->
+                              <div class="card-body rounded">
+                                <div class="d-flex">
+                                  <div class="py-2">
+                                    <div class="row">
+                                      <div class="col">
+                                          <a href="{% url 'profile' %}">
+                                          <img class="feedicon" src="{{ postUserImage.url }}" /> <!--post user icon-->
+                                          </a>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="p-2 flex-grow-1">
+                                    <div class="row">
+                                      <div class="col">
+                                        <a href="#">
+                                          <h5 class="card-title card-title-hover h5">{{ post.post_title }}</h5> <!--post title-->
+                                        </a>
+                                        <a href="{% url 'profile' %}">
+                                          <small class="text-body-secondary">
+                                            <span id="feed-username">@{{ post.post_user.username }}</span> <!--post username-->
+                                          </small>
+                                        </a> 
+                                      </div>
+                                    </div>
+                                    <div class="row row-tags">
+                                      <div class="col">
+                                        <small class="text-body-secondary">
+                                          <span class="feed-tag-group"> <!--post tags= group-->
+                                            {% for preference in post.post_preference %}
+                                            <a href="{% url 'browse' %}">
+                                              <span id="feed-tag" class="feed-tag profile d-inline-block">{{ preference }}</span>
+                                            </a>
+                                            {% endfor %}
+                                          </span>
+                                        </small>
+                                      </div>
+                                    </div>
+                                    <div class="row">
+                                      <div class="col">
+                                        <small class="h7-size d-block text-muted-color">{{ post.posted_date }}</small>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="py-2 text-center">
+                                    <div class="row">
+                                      <div class="col">
+                                        <span id="feed-like-icon">
+                                          <button class="feed-like-button btn like-button" data-post-id="{{ post.pk }}" data-bs-toggle="tooltip" data-bs-custom-class="custom-tooltip" data-bs-placement="top" data-bs-title="Like"> <!--post like button-->
+                                            {% if post.postID in liked_posts %}    
+                                              <i class="fa-solid fa-heart"></i>
+                                            {% else %}
+                                              <i class="fa-regular fa-heart"></i>
+                                            {% endif %}
+                                          </button>                                                
+                                        </span>
+                                      </div>
+                                    </div>
+                                    <div class="row">
+                                      <div class="col">
+                                        <small class="text-muted-color">
+                                          <span id="like-count-{{ post.pk }}">{{ like_counts }}</span> <!--post like counter-->
+                                        </small>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        {% endfor %}
+                      {% else %}
+                      <div class="mb-2 d-flex justify-content-md-start justify-content-center">
+                        <span class="text-center text-md-start">
+                          <p class="h5-size">No posts found.</p>
+                          <p class="h5-size">Follow users to see their posts here.</p>
+                        </span>
+                      </div>
+                      {% endif %}
+                      <!--post end-->
+                      {% endblock %}  
+                      <!-- FOLLOWING end -->
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/../static/js/lazyload.js"></script>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+$(document).ready(function() {
+    $('.like-button').click(function() {
+        var postId = $(this).data('post-id');
+        var button = $(this);
+
+        $.ajax({
+            url: '#',
+            method: 'POST',
+            data: {
+                'post_id': postId,
+                'csrfmiddlewaretoken': '{{ csrf_token }}'
+            },
+            success: function(response) {
+                var icon = button.find('i');
+                if (response.status == 'liked') {
+                    icon.removeClass('fa-regular fa-heart').addClass('fa-solid fa-heart');
+                } else if (response.status == 'unliked') {
+                    icon.removeClass('fa-solid fa-heart').addClass('fa-regular fa-heart');
+                }
+
+                // Update the like count
+                $('#like-count-' + postId).text(response.like_count);
+            }
+        });
+    });
+});
+</script>
+{% endblock %}

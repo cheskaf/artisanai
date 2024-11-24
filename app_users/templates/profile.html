@@ -1,0 +1,550 @@
+<!-- VIEW PROFILE (user) -->
+{% extends 'base.html' %} 
+
+{% block title %}@{{ user.username }} – {% endblock %}
+
+{% block styles %}
+    {% load static %}
+{% endblock %}   
+
+{% block content %}
+
+<input type="hidden" id="profiletheme" value="{{ user_profile_theme }}" />
+
+<div id="profilebodytheme" class="{{ user_profile_theme }}">
+    <div class="content-wrapper d-flex justify-content-center">
+        <div class="content-wrapper-width w-100">
+            <div class="group-profile-header d-flex flex-column justify-content-center align-items-center">
+                <div class="row d-flex flex-column align-items-center justify-content-center mt-1" style="width:325px;">
+                    <div class="col userimgcontainer d-flex flex-column align-items-center justify-content-center" style="z-index: 9;">
+                        {% block userimg %}
+                        {% if display_image %}
+                            <img id="userimg" class="object-fit-cover profileuserimg shadow-sm" src="{{ display_image.url }}" />
+                        {% else %}
+                            <img id="userimg" class="object-fit-cover profileuserimg shadow-sm" src="/../static/images/defaultuser.jpg" />
+                        {% endif %}
+                        {% endblock %}
+                    </div>
+                    <div class="profileheader">
+                    </div>
+                </div>
+                <div class="profilecardstyle shadow d-flex flex-column justify-content-center align-items-center">        
+                    <div class="row mt-2">
+                        <div class="col">
+                            <span class="displayname p-text" id="displayname">
+                                <b>
+                                    {% block displayname %}{{ user_display_name }}{% endblock %}
+                                </b>
+                            </span>
+                            {% block userlevel %}
+                            <span data-bs-toggle="tooltip" data-bs-custom-class="custom-tooltip" data-bs-title="{{ user_skill_level }}" data-bs-placement="right" data-bs-custom-class="custom-tooltip">
+                                <small>
+                                    <i class="fa-solid fa-splotch {{ user_skill_level }}-color"></i>
+                                </small>
+                            </span>
+                            {% endblock %}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col" id="username">
+                            <small class="text-muted-color h5-size">
+                                <span id="feed-username">
+                                    {% block username %}@{{ user.username }}{% endblock %}  
+                                </span> <!--post username-->
+                            </small>
+                        </div>
+                    </div>
+                    {% if user_bio %}
+                    <div class="row">
+                        <div class="col text-center" id="userbio-div" style="max-width: 275px; overflow: hidden;">
+                            <span id="userbio" class="h5-size">
+                                {% block description %}{{ user_bio }}{% endblock %}                  
+                            </span>                
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if user_social_link %}
+                    <div class="row">
+                        <div class="col text-center" id="userbio-div" style="max-width: 275px; overflow: hidden;">
+                            <span id="userlinkgroup" class="h5-size">
+                                {% block profilelink %}
+                                <a id="userlink" href="{{ user_social_link }}" class="profilesociallink">
+                                    <div class="cut-text">
+                                        <i class="fa-solid fa-link"></i>
+                                        {{ user_social_link }}
+                                    </div> 
+                                </a>
+                                {% endblock %}
+                            </span> 
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if user_preference_list %}
+                    <div class="row mt-2">
+                        <div class="col text-center" style="max-width: 275px;">
+                            {% block preferences %}
+                                {% for preference in user_preference_list %}
+                                    <a href="{% url 'browse' %}">
+                                        <span id="feed-tag" class="feed-tag profile d-inline-block">{{ preference }}</span>
+                                    </a>
+                                {% endfor %}
+                            {% endblock %}  
+                        </div>
+                    </div>
+                    {% endif %}
+                    <div class="row pt-2">
+                        <div class="col">
+                            <span class="px-2">
+                                {% block following %}
+                                <a href="#">
+                                    <button class="btn btn-profile-follow">
+                                        Following <b> {{ following_count }} </b>
+                                    </button>
+                                </a>
+                                {% endblock %}
+                            </span>
+                            <div class="vr"></div>
+                            <span class="px-2">
+                                {% block followers %}
+                                <a href="#">
+                                    <button class="btn btn-profile-follow">
+                                        Followers <b id="followers-count">{{ followers_count }}</b>
+                                    </button>
+                                </a>
+                                {% endblock %}
+                            </span>
+                        </div>
+                    </div>
+                
+                    {% block controls %}
+                    {% if user.username != logged_in_user.username %}
+                    <div class="row px-4">
+                        <div class="col d-flex justify-content-center pt-1 pb-2">
+                            <div class="py-2">
+                                <form id="followForm" action="#" method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="user_id" value="{{ user.id }}">
+                                    {% if following %}
+                                        <button class="btn btn-feed-style" type="submit" name="unfollow">
+                                            <div class="py-2 px-3 btn-follow project-btn-secondary">
+                                                <i class="fa-solid fa-user-minus"></i> Unfollow
+                                            </div>
+                                        </button>
+                                    {% else %}
+                                        <button class="btn btn-feed-style" type="submit" name="follow">
+                                            <div class="py-2 px-3 btn-follow project-btn-secondary">
+                                                <i class="fa-solid fa-user-plus"></i> Follow
+                                            </div>
+                                        </button>
+                                    {% endif %}
+                                </form>
+                            </div>
+                            <div class="py-2 ps-2">
+                                <button class="btn btn-feed-style" id="copy-button" onclick="copyToClipboard()">
+                                    <div class="py-2 px-3 project-btn__md project-btn-tertiary__transparent btn-follow ">
+                                        Share
+                                    </div>
+                                </button>
+                            </div>
+                            <!--<div class="py-2 ps-2 dropdown">
+                                <a href="#" class="btn btn-feed-style p-2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa-solid fa-ellipsis-vertical profileellipsis"></i>
+                                </a>
+                                <ul class="dropdown-menu h3-size">
+                                    <li><a class="dropdown-item" href="#"><i class="fa-regular fa-bell drop-icon"></i> Get Notifications</a></li>
+                                    <li><a class="dropdown-item" href="#"><i class="fa-solid fa-flag drop-icon"></i> Report User</a></li>
+                                </ul>
+                            </div>-->
+                        </div>
+                    </div>
+                    {% else %}
+                        <div class="row pb-2 px-4">
+                            <div class="col d-flex justify-content-center pt-1">
+                                <div class="py-2">
+                                    <a href="#">
+                                        <button class="btn btn-feed-style">
+                                            <div class="py-2 px-3 project-btn__md profile-btn-primary btn-150 ">
+                                                Edit
+                                            </div>
+                                        </button>
+                                    </a>
+                                </div>
+                                <div class="py-2 ps-2">
+                                    <button class="btn btn-feed-style" id="copy-button">
+                                        <div class="py-2 px-3 project-btn__md project-btn-tertiary__transparent btn-150 ">
+                                            Share
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    {% endblock %}
+                </div>
+            </div>
+            {% block groupprofilebody %}
+            <div class="group-profile-body d-flex flex-column justify-content-center align-items-center mt-5">
+                <div class="profile-body-header w-100">
+                    <div class="container-fluid padding-0 mb-1">
+                        <div class="row align-items-center">
+                            <div class="col-auto pe-0">
+                                <div class="py-2 d-flex justify-content-sm-start justify-content-start">
+                                    <b>
+                                        Posts
+                                    </b>
+                                </div>
+                            </div>
+                            <div class="col d-flex justify-content-end">
+                                <div class="py-2">    
+                                    {% block posttype %}
+                                    <ul class="nav nav-pills feed-toggle__accent2 profiletheme" id="profile-tab" role="tablist">
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link profiletheme active" id="profile-projects-tab" data-bs-toggle="pill" data-bs-target="#profile-projects" type="button" role="tab" aria-controls="profile-home" aria-selected="true">
+                                                Posts
+                                            </button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link profiletheme" id="profile-challenges-tab" data-bs-toggle="pill" data-bs-target="#profile-challenges" type="button" role="tab" aria-controls="profile-contact" aria-selected="false">
+                                                Challenges
+                                            </button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link profiletheme" id="profile-submissions-tab" data-bs-toggle="pill" data-bs-target="#profile-submissions" type="button" role="tab" aria-controls="profile-profile" aria-selected="false">
+                                                Submissions
+                                            </button>
+                                        </li>
+                                    </ul>   
+                                    {% endblock %}          
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="profile-body-content w-100">    
+                    <div class="tab-content" id="profile-tabContent">
+                        <div class="tab-pane fade show active" id="profile-projects" role="tabpanel" aria-labelledby="profile-projects-tab" tabindex="0">
+                            <div class="row  row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4">
+                                <!-- PROJECTS start -->
+                                {% block projects %}
+                                {% if posts %}
+                                    {% for post, first_image, postUserImage, liked_posts, like_counts in posts %}
+                                        <div class="col">
+                                            <div class="card shadow h-100">
+                                                <a href="#" class="card-img-top">
+                                                    <img data-src="{{ first_image.post_image_path.url }}" class="card-img-top" alt="..." />
+                                                </a>
+                                                <div class="card-body rounded">
+                                                    <div class="d-flex">
+                                                        <div class="py-2">
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <a href="#">
+                                                                        <img class="feedicon {{ user_skill_level }}-color" src="{{ postUserImage.url }}" href="{% url 'profile' username=post.post_user.username %}" /> <!--post user icon-->
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="p-2 flex-grow-1">
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <a href="#">
+                                                                        <h5 class="card-title card-title-hover h5"> {{ post.post_title }}</h5> <!--post title-->
+                                                                    </a>
+                                                                    <a href="#">
+                                                                        <small class="text-body-secondary">
+                                                                            <span id="feed-username">@{{ post.post_user.username }}</span> <!--post username-->
+                                                                        </small>
+                                                                    </a> 
+                                                                </div>
+                                                            </div>
+                                                            <div class="row row-tags">
+                                                                <div class="col">
+                                                                    <small class="text-body-secondary">
+                                                                        <span class="feed-tag-group"> <!--post tags= group-->
+                                                                            {% for pref in post.postPreference %}
+                                                                            <a href="{% url 'browse' %}">
+                                                                                <span id="feed-tag" class="feed-tag">{{ pref }}</span>
+                                                                            </a>
+                                                                            {% endfor %}
+                                                                        </span>
+                                                                    </small>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                  <small class="h7-size d-block text-muted-color">{{ post.posted_date }}</small>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="py-2 text-center">
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <span id="feed-like-icon">
+                                                                        <button class="feed-like-button btn like-button" data-post-id="{{ post.pk }}" data-bs-toggle="tooltip" data-bs-custom-class="custom-tooltip" data-bs-placement="top" data-bs-title="Like"> <!--post like button-->
+                                                                            {% if post.postID in liked_posts %}    
+                                                                            <i class="fa-solid fa-heart"></i>
+                                                                            {% else %}
+                                                                            <i class="fa-regular fa-heart"></i>
+                                                                            {% endif %}
+                                                                        </button>   
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <small class="text-muted-color">
+                                                                        <span id="like-count-{{ post.pk }}"> {{ like_counts }}</span> <!--post like counter-->
+                                                                    </small>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                {% else %}
+                                    <div class="row mb-2 mt-3">
+                                        <div class="col d-flex flex-column flex-grow-1 justify-content-center align-items-center">
+                                            <p class="h5-size">No posts found.</p>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                                {% endblock %}  
+                                <!-- PROJECTS end -->
+                            </div>
+                        </div>
+                        
+                        <div class="tab-pane fade" id="profile-submissions" role="tabpanel" aria-labelledby="profile-submissions-tab" tabindex="0">
+                            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4">
+                                <!-- SUBMISSIONS start -->
+                                {% block submissions %}
+                                {% if submissions %}
+                                    {% for submission, first_image, submissionUserImage in submissions %}
+                                        <div class="col">
+                                            <div class="card shadow h-100">
+                                                <a href="#" class="card-img-top">
+                                                    <img data-src="{{ first_image.challenge_post_image_path.url }}" class="card-img-top" alt="..." />
+                                                </a>
+                                                <div class="card-body rounded pb-2">
+                                                    <div class="d-flex">
+                                                        <div class="py-2">
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <a href="#">
+                                                                        <img class="feedicon {{ user_skill_level }}-color" src="{{ submissionUserImage.url }}" href="{% url 'profile' username=submission.challenge_post_user.username %}" /> <!--post user icon-->
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="p-2 flex-grow-1">
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <a href="#">
+                                                                        <h5 class="card-title card-title-hover h5"> {{ submission.challengeID.challenge_title }}</h5> <!--post title-->
+                                                                    </a>
+                                                                    <a href="#">
+                                                                        <small class="text-body-secondary">
+                                                                            <span id="feed-username">@{{ submission.challenge_post_user.username }}</span> <!--post username-->
+                                                                        </small>
+                                                                    </a> 
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col mt-1">
+                                                                  <small class="h7-size d-block text-muted-color">{{ submission.challenge_post_date }}</small>
+                                                                </div>
+                                                            </div>
+                                                        </div>                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                {% else %}
+                                    <div class="row mb-2 mt-3">
+                                        <div class="col d-flex flex-column flex-grow-1 justify-content-center align-items-center">
+                                            <p class="h5-size">No challenge submissions found.</p>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                                {% endblock %}  
+                                <!-- SUBMISSIONS end -->
+                            </div>
+                        </div>
+                        
+                        <div class="tab-pane fade" id="profile-challenges" role="tabpanel" aria-labelledby="profile-challenges-tab" tabindex="0">
+                            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4">
+                                <!-- CHALLENGES start -->
+                                {% block challenges %}
+                                {% if challenges %}
+                                    {% for challenge, first_image, challengeUserImage, submissions_count in challenges %}
+                                        <div class="col">
+                                            <div class="card shadow h-100">
+                                                <a href="#" class="card-img-top">
+                                                    <img data-src="{{ first_image.challenge_image_path.url }}" class="card-img-top" alt="..." />
+                                                </a>
+                                                <div class="card-body rounded pb-2">
+                                                    <div class="d-flex">
+                                                        <div class="py-2">
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <a href="#">
+                                                                        <img class="feedicon {{ user_skill_level }}-color" src="{{ challengeUserImage.url }}" href="{% url 'profile' username=challenge.challenge_user.username %}" /> <!--post user icon-->
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="p-2 flex-grow-1">
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <a href="#">
+                                                                        <h5 class="card-title card-title-hover h5"> {{ challenge.challenge_title }}</h5> <!--post title-->
+                                                                    </a>
+                                                                    <a href="#">
+                                                                        <small class="text-body-secondary">
+                                                                            <span id="feed-username">@{{ challenge.challenge_user.username }}</span> <!--post username-->
+                                                                        </small>
+                                                                    </a> 
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <span class="feed-tag-group">
+                                                                        <span id="feed-tag" class="feed-tag">{{ challenge.challenge_status }}</span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col mt-1">
+                                                                    <small class="h7-size d-block text-muted-color">Started {{ challenge.challenge_start_date }}</small>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                {% else %}
+                                    <div class="row mb-2 mt-3">
+                                        <div class="col d-flex flex-column flex-grow-1 justify-content-center align-items-center">
+                                            <p class="h5-size">No challenges started by this user found.</p>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                                {% endblock %}  
+                                <!-- CHALLENGES end -->
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            {% endblock %}
+        </div>
+    </div>
+</div>
+
+<script src="/../static/js/lazyload.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="/../static/js/clipboard.js"></script>
+
+<script>
+    // copy to clipboard
+    var shareableLink = "{{ shareable_link }}";
+
+    document.getElementById("copy-button").addEventListener("click", function() {
+        copyToClipboard(shareableLink);
+        showToast("Link copied to clipboard!");
+    });
+    
+
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    // copy to clipboard end
+</script>
+
+<script>
+    document.body.addEventListener('submit', function(e) {
+        if (e.target.id !== 'followForm') return;
+
+        e.preventDefault();
+
+        var form = e.target;
+        var data = new FormData(form);
+
+        fetch(form.action, {
+            method: 'POST',
+            body: data,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRFToken': getCookie('csrftoken')
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            var userIdInput = '<input type="hidden" name="user_id" value="' + data.user_id + '">';
+            if (data.status === 'followed') {
+                form.innerHTML = userIdInput + '<button class="btn btn-feed-style" type="submit" name="unfollow"><div class="py-2 px-3 btn-follow project-btn-secondary"><i class="fa-solid fa-user-minus"></i> Unfollow</div></button>';
+            } else if (data.status === 'unfollowed') {
+                form.innerHTML = userIdInput + '<button class="btn btn-feed-style" type="submit" name="follow"><div class="py-2 px-3 btn-follow project-btn-secondary"><i class="fa-solid fa-user-plus"></i> Follow </div></button>';
+            }
+            
+            // Update the followers count
+            $('#followers-count').text(data.followers_count);
+        });
+    });
+
+    $(document).ready(function() {
+        $('.like-button').click(function() {
+            var postId = $(this).data('post-id');
+            var button = $(this);
+
+            $.ajax({
+                url: '#',
+                method: 'POST',
+                data: {
+                    'post_id': postId,
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                },
+                success: function(response) {
+                    var icon = button.find('i');
+                    if (response.status == 'liked') {
+                        icon.removeClass('fa-regular fa-heart').addClass('fa-solid fa-heart');
+                    } else if (response.status == 'unliked') {
+                        icon.removeClass('fa-solid fa-heart').addClass('fa-regular fa-heart');
+                    }
+
+                    // Update the like count
+                    $('#like-count-' + postId).text(response.like_count);
+                }
+            });
+        });
+
+        // Open social link in new tab
+        var userSocialLink = $("#userlink").attr("href");
+
+        // Add a click event listener to open the link in a new tab
+        $("#userlink").click(function(event) {
+            event.preventDefault(); // Prevent the default behavior (following the link)
+
+            // Open the link in a new tab
+            window.open(userSocialLink, '_blank');
+        });
+    });
+</script>
+{% endblock %}
