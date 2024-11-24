@@ -1,0 +1,127 @@
+body {
+    background-image: url('/static/images/bg.jpg');
+    box-shadow: inset 0 0 0 1000px var(--bg-transparent);
+    background-size: cover;
+}
+
+button a {
+  color: var(--light);
+}
+
+button a:hover {
+  color: var(--light);
+}
+
+.row {
+    padding:20px;
+}
+
+.loginsignup-wrapper {
+    max-width: 450px; 
+    width: 100%;
+}
+
+.card-body-loginsignup {
+    padding: 0px 15px 0px 15px;
+    background: var(--card-color);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;  
+    border-radius: 15px; 
+    width:100%;
+}
+
+.card-loginsignup {    
+    border-radius: 15px;
+    width:100%;
+}
+
+h2 {
+  font-size: clamp(1.7rem, 2.5vw, 4vh);
+}
+ 
+h3 {
+  font-size: var(--subheading-font-size);
+}
+
+.card-p {
+  font-size: var(--h3-font-size);
+}
+
+.card-icon {
+  background: var(--accent2);
+  border-radius: 100%;
+  color: var(--light);
+}
+
+.fa-circle-check {
+  color: var(--accent2);
+  font-size: clamp(2.5rem, 4.5vw, 6.5vh);
+}
+
+.fa-circle-xmark {
+  color: var(--danger);
+  font-size: clamp(2.5rem, 4.5vw, 6.5vh);
+}
+
+/* The message box is shown when the user clicks on the password field */
+#message {
+  display: none;
+  background: var(--light);
+  border: 1px solid var(--accent3);
+  border-radius: 10px;
+  color: #000;
+  position: relative;
+  text-wrap:wrap;
+  width: 100%;    
+}
+
+#message p, label, a, button, .error-message {
+  font-size: var(--h3-font-size);
+}
+
+.col, .row, .col p {
+    margin: 0;
+    padding: 0;
+}
+
+/* Add a green text color and a checkmark when the requirements are right */
+.valid {
+  color: var(--success);
+}
+
+.valid:before {
+  position: relative;
+  /*left: -15px;
+  content: "/";*/
+}
+
+/* Add a red text color and an "x" icon when the requirements are wrong */
+.invalid {
+  color: var(--danger);
+}
+
+.invalid:before {
+  position: relative;
+  /*left: -15px;
+  content: "X ";*/
+}
+
+#valid-icon-letter, #valid-icon-capital, #valid-icon-number, #valid-icon-length {
+  display:none; 
+}
+
+#invalid-icon-letter, #invalid-icon-capital, #invalid-icon-number, #invalid-icon-length {
+  display:inline-block; 
+}
+
+.password-icon {
+  text-align: right;
+  font-size: var(--h5-font-size);
+}
+
+/* error message */  
+.error-message {
+    color: var(--danger);
+    border-radius: 10px;
+    text-align: center;
+}

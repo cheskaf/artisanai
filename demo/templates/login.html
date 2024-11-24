@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block styles %}
+{% load static %}
+<link href="{% static 'css/base.css' %}" rel="stylesheet" />
+{% endblock %}   
+
+{% block navright %}
+<div id="navbarRightCollapse">
+  <a href="{% url 'signup' %}">
+      <button class="btn login-btn-header">
+          Sign Up
+      </button>
+  </a>
+</div>
+{% endblock %} 
+
+{% block navleft %}{% endblock %}
+{% block burgericon %}{% endblock %}
+{% block floatingnav %}{% endblock %}
+
+{% block title %}Log In – {% endblock %}
+
+{% block section %}        
+<section class="section-content d-flex justify-content-center align-items-center">        
+    {% block content %}
+    <div class="content-wrapper d-flex justify-content-center align-items-center loginsignup-wrapper">
+      <div class="card-loginsignup">
+        <div class="card card-body-loginsignup p-4">
+          <div class="container py-2">
+            <h2 class="my-4 text-center guestheader"><b>Log</b> In</h2>
+            <form method="POST" action="{% url 'login' %}">
+              {% csrf_token %}
+              <div class="form-group my-2">
+                <label for="username_or_email">Email or Username</label>
+                <input type="text" id="username_or_email" name="username_or_email" class="form-style" value="{{ submitted_values.login_identifier }}" maxlength="100" required>
+              </div>
+              <div class="form-group my-2">
+                <label for="password">Password</label>
+                <div class="d-flex align-items-center">
+                  <input type="password" id="password" name="password" class="form-style" value="{{ submitted_values.password }}" maxlength="100" required>
+                  <i class="pw-toggle fa-regular fa-eye-slash" id="togglePassword"></i>
+                </div>
+              </div>
+              <!-- Placeholder for error message -->
+              {% if error_message %}
+              <small class="error-message mt-3">{{ error_message }}</small>
+              {% endif %}
+              <!-- Add more form fields as needed -->
+              <button type="submit" class="project-btn-secondary modal-btn-full py-2 my-4">Log In</button>
+            </form>
+            <div class="form-group mb-4">
+              <div class="d-flex justify-content-between">
+                <label class="padding-0" style="text-align:left;">Forgot your password?<a href="{% url 'password_reset' %}" class="d-block">Reset Password</a></label>
+                <label class="auto padding-0" style="text-align:right;">Don't have an account? <a href="{% url 'signup' %}" class="d-block">Sign Up</a></label>
+              </div>
+              
+            </div>
+          </div>      
+        </div>  
+      </div>
+    </div>
+    {% endblock %}
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="/../static/js/togglepw.js"></script>
+{% endblock %}
