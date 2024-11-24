@@ -160,3 +160,11 @@ cython_debug/
 #  and can be added to the global gitignore or merged into this file.  For a more nuclear
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
+
+# Static Files from collectstatic
+# In production, collectstatic is used to collect static files from apps and store it in a single directory
+# This directory is then served by the web server.
+# See https://docs.djangoproject.com/en/3.1/howto/static-files/deployment/
+# Typically static files should not be tracked by VCS, but in case of having a VCS for static files, it is
+# recommended to store them in a separate repository.
+staticfiles/

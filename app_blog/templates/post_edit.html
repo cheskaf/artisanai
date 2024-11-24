@@ -1,0 +1,274 @@
+{% extends 'post_view.html' %}
+
+{% block title %}Edit Post – {% endblock %}
+
+{% block styles %} 
+{% load static %} 
+<link href="{% static 'css/customcheckboxes.css' %}" rel="stylesheet" />
+<link href="{% static 'css/multiselectimages.css' %}" rel="stylesheet" />
+{% endblock %}  
+
+{% block content %}
+
+<div class="d-flex justify-content-around content-wrapper">
+  <div class="card profileedit-card-size">
+    <div class="row g-0 newpost-card-row">
+      <div class="col">
+        <button id="back" data-bs-toggle="tooltip" data-bs-custom-class="custom-tooltip" data-bs-placement="right" data-bs-title="Back" class="btn mx-2 hBack">
+            <i class="fa-solid fa-arrow-left"></i>
+        </button>
+        <!-- form start =============================================================================================== -->        
+        {% block form %}
+        <form method="post" action="{% url 'edit_post' post_id=post_id %}" enctype="multipart/form-data" onsubmit="return validateForm();">
+            {% csrf_token %}
+            <div class="card-body-sm rounded">
+                <div class="d-flex justify-content-center pt-3 pb-1">                    
+                    <div class="page-header-title__small">
+                        <b>Edit</b> Post
+                    </div>
+                </div>
+                
+                <div class="d-flex align-items-center">
+                    <div class="project-card-img position-relative d-flex align-items-center overflow-hidden rounded">
+                        <img data-src="{{ first_image.post_image_path.url }}" class="object-fit-cover border rounded h-auto w-100" alt="...">
+                    </div>                            
+                    <div class="d-flex justify-content-between py-3 flex-grow-1">
+                        <div class="ps-3 w-100">
+                            <small class="text-body-secondary">
+                                <span class="post-body-text"> <!--post name-->
+                                    <div class="mb-1">
+                                        <label for="images" class="form-label label__sm">Upload Images <small class="text-muted-color">(required, max. 3)</small></label>
+                                        <input type="file" class="form-control" id="images" name="images[]" multiple accept="image/*">
+                                        
+                                        <!-- Placeholder for error message -->
+                                        {% if error_message %}
+                                        <small class="error-message mt-3">{{ error_message }}</small>
+                                        {% endif %}
+                                    </div>
+                                </span>
+                            </small>
+                        </div>
+                    </div>     
+                </div>                        
+                    
+                <div class="d-flex align-items-center w-100">
+                    <div id="image_preview" class="d-flex justify-content-center align-items-center w-100"></div>
+                </div> 
+                
+                <div class="post-body-div">
+                    <small class="text-body-secondary">
+                        <span class="post-body-text"> <!--post name-->
+                            <div class="mb-1">
+                                <label for="postname" class="form-label label__sm" >Post Title <small class="text-muted-color">(required)</small></label>
+                                <input type="text" class="form-style form-text d-inline" name="title" value="{{ post.post_title }}" id="postname" maxlength="100" required>
+                            </div>
+                        </span>
+                    </small>
+                    <small class="text-body-secondary">
+                        <span class="post-body-text"> <!--post description-->
+                            <div class="mb-1">
+                                <label for="postdescription" class="form-label label__sm" >Post Description</label>
+                                <textarea class="form-style" id="postdescription" name="description" rows="15" maxlength="500">{{post.post_description}}</textarea>
+                            </div>
+                        </span>
+                    </small>
+                    <small class="text-body-secondary">
+                        <span class="post-body-text"> <!--post difficulty-->
+                            <div class="mb-1">
+                                <label for="difficultySelect" class="form-label label__sm" >Difficulty</label>
+                                <select id="difficultySelect" class="form-select form-select-sm d-inline" name="skill_level">                                
+                                    <option value="beginner" style="font-family:'Verdana'; font-size:12px"{% if post.post_skill_level == 'beginner' %} selected {% endif %} >beginner</option>
+                                    <option value="novice" style="font-family:'Verdana'; font-size:12px" {% if post.post_skill_level == 'novice' %} selected {% endif %} >novice</option>
+                                    <option value="intermediate" style="font-family:'Verdana'; font-size:12px" {% if post.post_skill_level == 'intermediate' %} selected {% endif %} >intermediate</option>
+                                    <option value="expert" style="font-family:'Verdana'; font-size:12px"{% if post.post_skill_level == 'expert' %} selected {% endif %} >expert</option>
+                                    <option value="master" style="font-family:'Verdana'; font-size:12px"{% if post.post_skill_level == 'master' %} selected {% endif %} >master</option>
+                                </select>  
+                            </div>
+                        </span>
+                    </small>
+                    <small class="text-body-secondary">
+                        <span class="post-body-text"> <!--post tags-->
+                            <div class="mb-0">
+                                <label for="postname" class="form-label label__sm">Project Type</label>
+                                <div class="select-btn-preferences">
+                                    <span class="btn-text" id="tagsSelect">
+                                    {% if post.post_preference %}
+                                        {{ post.post_preference|join:', ' }}
+                                    {% else %}
+                                        Select
+                                    {% endif %}
+                                    </span>
+                                    <span class="arrow-dwn">
+                                        <i class="fa-solid fa-chevron-down"></i>
+                                    </span>
+                                </div>
+                                
+                                <ul class="list-items-preferences">
+                                    <span class="preferences-label-muted">Wearables</span>
+                                    <div class="boxes-profileedit tagCheckboxGroup">
+                                        <input type="checkbox" class="tagCheckbox" name="preferred_projects" id="hats" value="hats" {% if 'hats' in post.post_preference %} checked {% endif %}>
+                                        <label for="hats">Hats</label>
+                                        
+                                        <input type="checkbox" class="tagCheckbox" name="preferred_projects" id="clothes" value="clothes" {% if 'clothes' in post.post_preference %} checked {% endif %}>
+                                        <label for="clothes">Clothes</label>
+                                        
+                                        <input type="checkbox" class="tagCheckbox" name="preferred_projects" id="scarves" value="scarves" {% if 'scarves' in post.post_preference %} checked {% endif %}>
+                                        <label for="scarves">Scarves</label>
+                                        
+                                        <input type="checkbox" class="tagCheckbox" name="preferred_projects" id="socks" value="socks" {% if 'socks' in post.post_preference %} checked {% endif %}>
+                                        <label for="socks">Socks</label>
+                                        
+                                        
+                                        <span class="preferences-label-muted">Home Decor</span>
+                                    
+                                        <input type="checkbox" class="tagCheckbox" name="preferred_projects" id="blankets" value="blankets" {% if 'blankets' in post.post_preference %} checked {% endif %}>
+                                        <label for="blankets">Blankets</label>
+                                        
+                                        <input type="checkbox" class="tagCheckbox" name="preferred_projects" id="pillows" value="pillows" {% if 'pillows' in post.post_preference %} checked {% endif %}>
+                                        <label for="pillows">Pillows</label>
+                                        
+                                        <input type="checkbox" class="tagCheckbox" name="preferred_projects" id="mats" value="mats" {% if 'mats' in post.post_preference %} checked {% endif %}>
+                                        <label for="mats">Mats</label>
+                                        
+                                        <input type="checkbox" class="tagCheckbox" name="preferred_projects" id="wallhangings" value="wall hangings" {% if 'wall hangings' in post.post_preference %} checked {% endif %}>
+                                        <label for="wallhangings">Wall Hangings</label>
+                                        
+                                        <input type="checkbox" class="tagCheckbox" name="preferred_projects" id="baskets" value="baskets" {% if 'baskets' in post.post_preference %} checked {% endif %}>
+                                        <label for="baskets">Baskets</label>
+                                    
+                                    
+                                        <span class="preferences-label-muted">Amigurumi & Toys</span>
+                                    
+                                        <input type="checkbox" class="tagCheckbox" name="preferred_projects" id="stuffedtoys" value="stuffed toys" {% if 'stuffed toys' in post.post_preference %} checked {% endif %}>
+                                        <label for="stuffedtoys">Stuffed Toys</label>
+                                        
+                                        <input type="checkbox" class="tagCheckbox" name="preferred_projects" id="dolls" value="dolls" {% if 'dolls' in post.post_preference %} checked {% endif %}> 
+                                        <label for="dolls">Dolls</label>
+                                    
+                                    
+                                        <span class="preferences-label-muted">Accessories</span>
+                                    
+                                        <input type="checkbox" class="tagCheckbox" name="preferred_projects" id="bags" value="bags" {% if 'bags' in post.post_preference %} checked {% endif %}>
+                                        <label for="bags">Bags</label>
+                                        
+                                        <input type="checkbox" class="tagCheckbox" name="preferred_projects" id="hairaccessories" value="hair accessories" {% if 'hair accessories' in post.post_preference %} checked {% endif %}>
+                                        <label for="hairaccessories">Hair Accessories</label>
+                                        
+                                        <input type="checkbox" class="tagCheckbox" name="preferred_projects" id="jewelry" value="jewelry" {% if 'jewelry' in post.post_preference %} checked {% endif %}>
+                                        <label for="jewelry">Jewelry</label>
+                                    
+                                    
+                                        <span class="preferences-label-muted">Seasonal Decor</span>
+                                    
+                                        <input type="checkbox" class="tagCheckbox" name="preferred_projects" id="christmas" value="christmas" {% if 'christmas' in post.post_preference %} checked {% endif %}>
+                                        <label for="christmas">Christmas</label>
+                                        
+                                        <input type="checkbox" class="tagCheckbox" name="preferred_projects" id="halloween" value="halloween" {% if 'halloween' in post.post_preference %} checked {% endif %}>
+                                        <label for="halloween">Halloween</label>
+                                        
+                                        <input type="checkbox" class="tagCheckbox" name="preferred_projects" id="easter" value="easter" {% if 'easter' in post.post_preference %} checked {% endif %}>
+                                        <label for="easter">Easter</label>
+                                    
+                                    
+                                        <span class="preferences-label-muted">Other</span>
+                                    
+                                        <input type="checkbox" class="tagCheckbox" name="preferred_projects" id="keychains" value="keychains" {% if 'keychains' in post.post_preference %} checked {% endif %}>
+                                        <label for="keychains">Keychains</label>
+                                        
+                                        <input type="checkbox" class="tagCheckbox" name="preferred_projects" id="mugcozies" value="mug cozies" {% if 'mug cozies' in post.post_preference %} checked {% endif %}>
+                                        <label for="mugcozies">Mug Cozies</label>
+                                        
+                                        <input type="checkbox" class="tagCheckbox" name="preferred_projects" id="bottleholders" value="bottle holders" {% if 'bottle holders' in post.post_preference %} checked {% endif %}>
+                                        <label for="bottleholders">Bottle Holders</label>
+                                        
+                                        <input type="checkbox" class="tagCheckbox" name="preferred_projects" id="flowers" value="flowers" {% if 'flowers' in post.post_preference %} checked {% endif %}>
+                                        <label for="flowers">Flowers</label>
+                                        
+                                        <input type="checkbox" class="tagCheckbox" name="preferred_projects" id="grannysquares" value="granny squares" {% if 'granny squares' in post.post_preference %} checked {% endif %}>
+                                        <label for="grannysquares">Granny Squares</label>
+                                        
+                                        <input type="checkbox" class="tagCheckbox" name="preferred_projects" id="appliques" value="appliques" {% if 'appliques' in post.post_preference %} checked {% endif %}>
+                                        <label for="appliques">Appliques</label>
+                                    </div>
+                                </ul>
+                            </div>
+                        </span>
+                    </small>
+                </div>
+                
+                <div class="col d-flex justify-content-center pt-1 pb-4">
+                    <div class="py-2">
+                        <a href="#">                            
+                            <div class="text-center btn-feed-style py-2 px-3 project-btn__md project-btn-tertiary__transparent btn-150 modbtn hBack">Cancel</div>
+                        </a>
+                    </div>
+                    <div class="py-2 ps-2">
+                        {% if post_id %}
+                            <a href="{% url 'view_post' post_id=post_id %}">
+                                <button class="btn btn-feed-style" type="submit">
+                                    <div class="py-2 px-3 project-btn__md project-btn-primary btn-150 modbtn">Save</div>
+                                </button>
+                            </a>
+                        {% else %}
+                            <button class="btn btn-feed-style" type="submit">
+                                <div class="py-2 px-3 project-btn__md project-btn-primary btn-150 modbtn">Save</div>
+                            </button>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </form>    
+        {% endblock %}
+        <!-- form end =============================================================================================== -->
+      </div>      
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+
+{% block scripts %}
+<script src="/../static/js/validateimginput.js"></script>
+<script>
+    function validateForm() {
+        // Get values of required fields
+        var title = document.getElementById("postname").value.trim();
+
+        // Check if required fields are empty
+        if (title === "") {
+            alert("Please fill in all required fields.");
+            return false; // Prevent form submission
+        } 
+
+        return true; // Allow form submission
+    }
+    
+    // Function to show the confirmation modal
+    function showConfirmationModal() {
+        $('#confirmationModal').modal('show');
+        return true;
+    }
+
+    // Set the onbeforeunload event handler
+    window.onbeforeunload = showConfirmationModal;
+
+    // Handle the "Leave" button click event
+    $('#leavePage').on('click', function() {
+        $('#confirmationModal').modal('hide');
+        window.onbeforeunload = null; // Remove the confirmation modal when the user decides to leave
+    });
+
+    // Add a listener to prevent the confirmation modal on form submit
+    $('form').on('submit', function() {
+        window.onbeforeunload = null; // Remove the confirmation modal when the form is submitted
+    });
+</script>
+
+<script src="/../static/js/profiletheme.js"></script>
+<script src="/../static/js/lazyload.js"></script>
+
+<!-- multiselect -->
+<script src="/../static/js/multiselectimages.js"></script>
+<script src="/../static/js/tagselectone.js"></script>
+{% endblock %}

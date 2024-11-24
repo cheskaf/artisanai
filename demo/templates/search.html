@@ -1,0 +1,290 @@
+{% extends 'base.html' %}
+
+{% block title %}Search – {% endblock %}
+
+{% block content %}
+<div class="content-wrapper d-flex justify-content-around">
+  <div class="content-wrapper-width__md">
+    <!-- user_search_results.html -->
+    <form action="{% url 'search' %}" method="get" class="w-100">
+        <div class="d-flex justify-content-between align-items-center pt-0 pb-1">                   
+            <a data-bs-toggle="tooltip" data-bs-custom-class="custom-tooltip" data-bs-placement="right" data-bs-title="Back" class="btn me-1 hBack backbtn"><i class="fa-solid fa-arrow-left"></i></a>
+            <input type="text" name="q" placeholder="Search..." class="form-search" maxlength="100">
+            <button type="submit" class="ms-1 btn-style-sm">Search</button>
+        </div>
+    </form>
+    {% if query %}
+        <div class="row mb-1 mt-3">
+            <div class="col d-flex flex-column flex-grow-1 justify-content-start align-items-start">
+                <ul class="nav nav-pills feed-toggle__accent2 profiletheme" id="search-tab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link profiletheme active" id="search-users-tab" data-bs-toggle="pill" data-bs-target="#search-users" type="button" role="tab" aria-controls="search-home" aria-selected="true">
+                            Users
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link profiletheme" id="search-posts-tab" data-bs-toggle="pill" data-bs-target="#search-posts" type="button" role="tab" aria-controls="search-contact" aria-selected="false">
+                            Posts
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link profiletheme" id="search-challenges-tab" data-bs-toggle="pill" data-bs-target="#search-challenges" type="button" role="tab" aria-controls="search-profile" aria-selected="false">
+                            Challenges
+                        </button>
+                    </li>
+                </ul>
+                <p class="my-2">Search results for "<b>{{ query }}</b>"</p>
+            </div>
+        </div>
+        <div class="profile-body-content w-100">    
+            <div class="tab-content" id="profile-tabContent">
+                <div class="tab-pane fade show active" id="search-users" role="tabpanel" aria-labelledby="search-users-tab" tabindex="0">
+                    <div><b>Users</b></div>
+                    <!-- USERS start -->
+                    {% if users_exist %}
+                        <div class="row row-cols-1 row-cols-sm-2 g-2 mb-3">
+                            {% for user, user_image in users %}
+                                <div class="col">
+                                    <a href="{% url 'profile' username=user_image.custom_user_id.username %}">
+                                        <div class="card shadow h-100">
+                                            <div class="card-body__library rounded">
+                                                <div class="d-flex align-items-center">
+                                                    <div>
+                                                        <div class="row h-100">
+                                                            <div class="col">
+                                                                {% if user_image.display_image %}
+                                                                    <img class="feedicon expert" data-src="{{ user_image.display_image.url }}" href="{% url 'profile' username=user_image.custom_user_id.username %}" />
+                                                                {% else %}
+                                                                    <img class="feedicon expert" data-src="/../static/images/defaultuser.jpg" href="{% url 'profile' username=user_image.custom_user_id.username %}" />
+                                                                {% endif %}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex-grow-1">
+                                                        <div class="row">
+                                                            <div class="col ms-3 library-item align-items-center">
+                                                                <div class="text-left">
+                                                                    <p style="overflow-wrap: break-word; white-space: normal;"><b>{{ user_image.display_name }}</b></p>
+                                                                    <p style="overflow-wrap: break-word; white-space: normal;">@{{ user_image.custom_user_id.username }}</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="row mb-2">
+                            <div class="col d-flex flex-column flex-grow-1 justify-content-start align-items-start">
+                                <p class="h5-size">No users found.</p>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+                    <!-- USERS end -->
+                            
+                <div class="tab-pane fade" id="search-posts" role="tabpanel" aria-labelledby="search-posts-tab" tabindex="0">
+                    <b class="d-block">Posts</b>
+                    <!-- POSTS start -->
+                    {% if posts_exist %}
+                    <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 g-2 mb-3">
+                        {% for post, post_image in posts %}
+                        <div class="col">
+                            <div class="card h-100 shadow">
+                                <!--post img-->
+                                <a href="{% url 'view_post' post_id=post.pk %}">
+                                    {% with post_image=post.postimage_set.first %}
+                                        {% if post_image %}
+                                            <img data-src="{{ post_image.post_image_path.url }}" class="card-img-top" alt="Post Image" style="min-height:120px; max-height:120px;"/>
+                                        {% endif %}
+                                    {% endwith %}
+                                </a>
+                                <!--post body-->
+                                <div class="card-body p-0 rounded">
+                                    <div class="d-flex">
+                                        <div class="p-2 flex-grow-1">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <a href="{% url 'view_post' post_id=post.pk %}">
+                                                        <h5 class="card-title card-title-hover h3-size dark-text"><b>{{ post.post_title }}</b></h5> <!--post title-->
+                                                    </a>
+                                                    <a href="{% url 'profile' username=post.post_user.username %}">
+                                                        <small class="text-body-secondary h7-size">
+                                                            <span id="feed-username">@{{ post.post_user.username }}</span> <!--post username-->
+                                                        </small>
+                                                    </a> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    <div class="row mb-2">
+                        <div class="col d-flex flex-column flex-grow-1 justify-content-start align-items-start">
+                            <p class="h5-size">No posts found.</p>
+                        </div>
+                    </div>
+                    {% endif %}
+                    <!-- POSTS end -->
+                </div>
+                            
+                <div class="tab-pane fade" id="search-challenges" role="tabpanel" aria-labelledby="search-challenges-tab" tabindex="0">
+                    <b class="d-block">Challenges</b>
+                    <!-- CHALLENGES start -->
+                    {% if challenges_exist %}
+                    <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 g-2 mb-3">
+                        {% for challenge, challenge_image in challenges %}
+                        <div class="col">
+                            <div class="card shadow h-100">
+                                <!--post img-->
+                                <a href="{% url 'view_challenge' challenge_id=challenge.pk %}">
+                                    {% with first_image=challenge.challengeimage_set.first %}
+                                        {% if first_image %}
+                                            <img data-src="{{ first_image.challenge_image_path.url }}" class="card-img-top" alt="..." style="min-height:120px; max-height:120px;" />
+                                        {% endif %}
+                                    {% endwith %}
+                                </a>
+                                <!--post body-->
+                                <div class="card-body p-0 rounded">
+                                    <div class="d-flex">
+                                        <div class="p-2 flex-grow-1">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <a href="{% url 'view_challenge' challenge_id=challenge.pk %}">
+                                                        <h5 class="card-title card-title-hover h3-size dark-text"><b>{{ challenge.challenge_title }}</b></h5> <!--post title-->
+                                                    </a>
+                                                    <small class="text-body-secondary">
+                                                        <span class="feed-tag-group"> <!--post tags= group-->
+                                                            <span id="feed-tag" class="feed-tag">{{ challenge.challenge_status }}</span>
+                                                        </span>
+                                                    </small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                        <div class="row mb-2">
+                            <div class="col d-flex flex-column flex-grow-1 justify-content-start align-items-start">
+                                <p class="h5-size">No challenges found.</p>
+                            </div>
+                        </div>
+                    {% endif %}
+                    <!-- CHALLENGES end -->
+                </div>
+            </div>
+        </div>
+        <hr>
+        {% endif %} 
+        <!-- QUERY END-->
+        
+        
+        
+        <div class="d-flex justify-content-center align-items-center pt-3">    
+            <p class="mb-0"><b>Browse</b> Categories</p>
+        </div>
+        
+        <div class="row mb-4 mt-2">
+            <div class="col">
+                <article class="browse-group">
+                    <div class="d-flex flex-column justify-content-center pb-2">              
+                        <div class="row row-cols-1 row-cols-sm-2 g-2">
+                            <div class="col">
+                                <div class="category-div card">
+                                    <div class="h5-div">
+                                        <h5>Wearables</h5>
+                                    </div>
+                                    <nav class="tags category-subgroup-content">
+                                        <a href="{% url 'browse' category='hats' %}">Hats</a>
+                                        <a href="{% url 'browse' category='clothes' %}">Clothes</a>
+                                        <a href="{% url 'browse' category='scarves' %}">Scarves</a>
+                                        <a href="{% url 'browse' category='socks' %}">Socks</a>
+                                    </nav>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="category-div card">
+                                    <div class="h5-div">
+                                        <h5>Home Decor</h5>
+                                    </div>
+                                    <nav class="tags category-subgroup-content">
+                                        <a href="{% url 'browse' category='blankets' %}">Blankets</a>
+                                        <a href="{% url 'browse' category='pillows' %}">Pillows</a>
+                                        <a href="{% url 'browse' category='mats' %}">Mats</a>
+                                        <a href="{% url 'browse' category='wall hangings' %}">Wall Hangings</a>
+                                        <a href="{% url 'browse' category='baskets' %}">Baskets</a>
+                                    </nav>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="category-div card">
+                                    <div class="h5-div">
+                                        <h5>Amigurumi & Toys</h5>
+                                    </div>
+                                    <nav class="tags category-subgroup-content">
+                                        <a href="{% url 'browse' category='stuffed toys' %}">Stuffed Toys</a>
+                                        <a href="{% url 'browse' category='dolls' %}">Dolls</a>
+                                    </nav>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="category-div card">
+                                    <div class="h5-div">
+                                        <h5>Accessories</h5>
+                                    </div>
+                                    <nav class="tags category-subgroup-content">
+                                        <a href="{% url 'browse' category='bags' %}">Bags</a>
+                                        <a href="{% url 'browse' category='hair accessories' %}">Hair Accessories</a>
+                                        <a href="{% url 'browse' category='jewelry' %}">Jewelry</a>
+                                    </nav>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="category-div card">
+                                    <div class="h5-div">
+                                        <h5>Seasonal and Holiday Decorations</h5>
+                                    </div>
+                                    <nav class="tags category-subgroup-content">
+                                        <a href="{% url 'browse' category='christmas' %}">Christmas</a>
+                                        <a href="{% url 'browse' category='halloween' %}">Halloween</a>
+                                        <a href="{% url 'browse' category='easter' %}">Easter</a>
+                                    </nav>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="category-div card">
+                                    <div class="h5-div">
+                                        <h5>Other</h5>
+                                    </div>
+                                    <nav class="tags category-subgroup-content">
+                                        <a href="{% url 'browse' category='keychains' %}">Keychains</a>
+                                        <a href="{% url 'browse' category='mug cozies' %}">Mug Cozies</a>
+                                        <a href="{% url 'browse' category='water bottle holders' %}">Water Bottle Holders</a>
+                                        <a href="{% url 'browse' category='flowers' %}">Flowers</a>
+                                        <a href="{% url 'browse' category='granny squares' %}">Granny Squares</a>
+                                        <a href="{% url 'browse' category='appliques' %}">Appliques</a>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/../static/js/lazyload.js"></script>
+{% endblock %}

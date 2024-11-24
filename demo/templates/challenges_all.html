@@ -1,0 +1,180 @@
+{% extends 'base.html' %}
+
+{% block title %}Challenges – {% endblock %}
+
+{% block content %}
+<div class="content-wrapper d-flex justify-content-around">
+  <!--feed toggle buttons-->
+  <div class="content-wrapper-width">
+    <div class="container-fluid padding-0">
+      <div class="row d-flex justify-content-between feed-header">
+        <div class="col d-flex flex-column flex-grow-1 justify-content-sm-start justify-content-start align-items-start">
+            <div class="page-header-title">
+                <b>Challenges</b>
+            </div>
+            <div class="p-text">Participate in ongoing crochet challenges or start your own!</div>
+        </div>
+        <div class="col-auto d-flex justify-content-sm-end justify-content-end">
+          <div class="py-2 padding-0">
+            <div class="d-flex justify-content-sm-end justify-content-end feed-toggle btn-a">
+              <a href="{% url 'new_challenge' %}">
+                <button class="btn">
+                  <div class="py-2 px-3 post-btn"><i class="fa-solid fa-file-circle-plus"></i> New</div>
+                </button>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="group-profile-body d-flex flex-column justify-content-center align-items-center">
+        <div class="profile-body-header w-100">
+            <div class="container-fluid padding-0 mb-1">
+                <div class="row align-items-center">
+                  <div class="col d-flex justify-content-start">
+                    <div class="pb-2">     
+                        <ul class="nav nav-pills feed-toggle__accent3" id="challenges-tab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="challenges-ongoing-tab" data-bs-toggle="pill" data-bs-target="#challenges-ongoing" type="button" role="tab" aria-controls="profile-home" aria-selected="true">
+                                    Ongoing
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="challenges-ended-tab" data-bs-toggle="pill" data-bs-target="#challenges-ended" type="button" role="tab" aria-controls="profile-contact" aria-selected="false">
+                                    Ended
+                                </button>
+                            </li>
+                        </ul>             
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+        <div class="profile-body-content w-100">    
+            <div class="tab-content" id="challenges-tabContent">
+                <div class="tab-pane fade show active" id="challenges-ongoing" role="tabpanel" aria-labelledby="challenges-ongoing-tab" tabindex="0">
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4">
+                        <!-- ONGOING start -->
+                        {% block ongoing %}
+                        {% for challenge, challenge_image, challengeUserImage, challengeSubmitted in ongoing_challenges %}
+                        <!--post copypasted start -->    
+                          <div class="col">
+                            <div class="card shadow h-100">
+                              <!--post img-->
+                                <a href="{% url 'view_challenge' challenge_id=challenge.pk %}" class="card-img-top">
+                                  <img data-src="{{ challenge_image.challenge_image_path.url }}" class="card-img-top" alt="..." />
+                                </a>
+                              <!--post body-->
+                              <div class="card-body rounded">
+                                <div class="d-flex">
+                                  <div class="p-2 flex-grow-1">
+                                    <div class="row">
+                                      <div class="col">
+                                        <a href="{% url 'view_challenge' challenge_id=challenge.pk %}">
+                                          <h5 class="card-title card-title-hover h5">{{ challenge.challenge_title }}</h5> <!--post title-->
+                                        </a>
+                                        <small class="text-body-secondary">
+                                          <span class="feed-tag-group"> <!--post tags= group-->
+                                            <a href="#">
+                                              <span id="feed-tag" class="feed-tag">Ends on {{ challenge.challenge_end_date }}</span>
+                                            </a>
+                                          </span>
+                                        </small>
+                                      </div>
+                                    </div>
+                                    
+                                  </div>
+                                  <div class="py-2 text-center">
+                                    <div class="row">
+                                      <div class="col">
+                                        <span id="feed-like-icon">
+                                          <i class="fa-solid fa-ranking-star"></i>
+                                        </span>
+                                      </div>
+                                    </div>
+                                    <div class="row">
+                                      <div class="col">
+                                        <small class="text-muted-color">
+                                          <span id="feed-like-count">{{ challengeSubmitted }}</span> <!--post like counter-->
+                                        </small>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <!--post copypasted end -->
+                          {% endfor %}
+                      {% endblock %}  
+                        <!-- ONGOING end -->
+                    </div>
+                </div>
+                
+                <div class="tab-pane fade" id="challenges-ended" role="tabpanel" aria-labelledby="challenges-ended-tab" tabindex="0">
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4 w-100">
+                        <!-- ENDED start -->
+                        {% block ended %}
+                         {% for challenge, challenge_image, challengeUserImage, challengeSubmitted in ended_challenges %}
+                        <!--post start-->
+                        <div class="col">
+                          <div class="card shadow h-100">
+                            <!--post img-->
+                            <a href="{% url 'view_challenge' challenge_id=challenge.pk %}" class="card-img-top">
+                              <img data-src="{{ challenge_image.challenge_image_path.url }}" class="card-img-top" alt="..." />
+                            </a>
+                            <!--post body-->
+                            <div class="card-body rounded">
+                              <div class="d-flex">
+                                <div class="p-2 flex-grow-1">
+                                  <div class="row">
+                                    <div class="col">
+                                      <a href="{% url 'view_challenge' challenge_id=challenge.pk %}">
+                                        <h5 class="card-title card-title-hover h5">{{ challenge.challenge_title }}</h5> <!--post title-->
+                                      </a>
+                                      <small class="text-body-secondary">
+                                        <span class="feed-tag-group"> <!--post tags= group-->
+                                          <span>
+                                            <span id="feed-tag" class="feed-tag">Ended</span>
+                                          </span>
+                                        </span>
+                                      </small>
+                                    </div>
+                                  </div>
+                                  
+                                </div>
+                                <div class="py-2 text-center">
+                                  <div class="row">
+                                    <div class="col">
+                                      <span id="feed-like-icon">
+                                        <i class="fa-solid fa-ranking-star"></i>
+                                      </span>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col">
+                                      <small class="text-muted-color">
+                                        <span id="feed-like-count">{{ challengeSubmitted }}</span> <!--post like counter-->
+                                      </small>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!--post end-->
+                        {% endfor %}
+                        {% endblock %}  
+                        <!-- ENDED end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>      
+    </div>
+  </div>
+</div>
+
+<script src="/../static/js/lazyload.js"></script>
+{% endblock %}

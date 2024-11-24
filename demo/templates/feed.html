@@ -1,0 +1,2197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#2E9FA2" />
+    <meta name="description"
+        content="The ultimate crafting companion! Share, challenge, and organize your crochet projects and materials, all in one convenient platform. Embrace creativity with ease, anytime, anywhere!">
+    <title>Home – ArtisanAI</title>
+
+    <!-- Other common head elements here -->
+    <!-- favicon -->
+    <link rel="icon" href="../images/favicon.ico" type="image/png" />
+    <!-- bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
+    <!-- fontawesome -->
+    <script src="https://kit.fontawesome.com/03977197ef.js" crossorigin="anonymous"></script>
+    <!-- styles -->
+    <link href="../css/include.css" rel="stylesheet" />
+    <link href="../css/themes.css" rel="stylesheet" />
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+</head>
+
+<body>
+    <!--header-->
+    <nav class="navbar sticky-top">
+        <div class="container-fluid">
+            <!--toggle-->
+
+            <button class="navbar-toggler me-4" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                <i class="fas fa-bars" title="Menu"></i>
+            </button>
+            <!--brand-->
+            <a class="navbar-brand" href="feed.html">
+                <span class="brand-ai">
+                    <span class="brand-artisan"> <span class="color1">A</span><span class="color2">r</span><span
+                            class="color3">t</span><span class="color1">i</span><span class="color2">s</span><span
+                            class="color3">a</span><span class="color1">n</span><span
+                            class="color2 brand-ai">AI</span></span>
+                </span>
+            </a>
+
+            <div>
+                <span class="profile-dropdown-group">
+                    <button type="button" class="btn profilebtn usericonframe" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+
+                        <a class="profile" href="profile.html" title="Profile"> <!-- add URL -->
+                            <img id="usericon" class="object-fit-cover"
+                                src="https://cdn.picrew.me/app/image_maker/696219/icon_EZdOOG8uvorfZktG.png" />
+                        </a>
+
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end h3-size">
+                        <li>
+                            <a href="profile.html">
+                                <button class="dropdown-item" type="button"><i class="fa-solid fa-user drop-icon"></i>
+                                    Profile</button>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="settings.html">
+                                <button class="dropdown-item" type="button"><i class="fa-solid fa-gear drop-icon"></i>
+                                    Settings</button>
+                            </a>
+                        </li>
+                        <hr class="sidebar-divider m-1" />
+                        <li>
+                            <a href="login.html">
+                                <button class="dropdown-item" type="button"><i
+                                        class="fa-solid fa-right-from-bracket drop-icon"></i> Logout</button>
+                            </a>
+                        </li>
+                    </ul>
+                </span>
+            </div>
+            <!--sidebar-->
+            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar"
+                aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header">
+                    <button class="btn btnclose" type="button" data-bs-dismiss="offcanvas" aria-label="Close"
+                        title="Close">
+                        <i class="fa-solid fa-xmark" id="fa-xmark"></i>
+                    </button>
+                    <a href="search.html">
+                        <button class="btn btnnotif" type="button" aria-label="Browse" title="Browse">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </a>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <!--sidebrand-->
+                        <div class="d-flex justify-content-center mb-30">
+                            <span class="brand-sidebar brand-ai">
+                                <i class="fa-solid fa-splotch brand-splotch colorsplotch"></i>
+                                <span class="brand-artisan"> <span class="color4">A</span><span
+                                        class="color5">r</span><span class="color6">t</span><span
+                                        class="color4">i</span><span class="color5">s</span><span
+                                        class="color6">a</span><span class="color4">n</span><span
+                                        class="color5 brand-ai">AI</span></span>
+                            </span>
+                        </div>
+                        <!--sidelinks-->
+                        <div class="section-navlink">
+                            <li class="nav-item">
+                                <!--add active class-->
+                                <a class="nav-link" href="feed.html">
+                                    <span>
+                                        <i class="fa-solid fa-house navicon navicon1"></i>
+                                        <span class="navname">Home<span>
+                                            </span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="library.html">
+                                    <span>
+                                        <i class="fa-solid fa-book-bookmark navicon navicon3"></i>
+                                        <span class="navname">Library<span>
+                                            </span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="challenges_all.html">
+                                    <span>
+                                        <i class="fa-solid fa-chart-simple navicon navicon4"></i>
+                                        <span class="navname">Challenges<span>
+                                            </span>
+                                </a>
+                            </li>
+                            <li class="nav-item mb-30">
+                                <a class="nav-link" href="projects_all.html">
+                                    <span>
+                                        <i class="fa-solid fa-box-archive navicon navicon2"></i>
+                                        <span class="navname">Projects<span>
+                                            </span>
+                                </a>
+                            </li>
+
+                        </div>
+
+                        <!-- themes -->
+                        <div class="d-flex justify-content-center label-sm">Theme</div>
+                        <div class="d-flex justify-content-center">
+                            <select id="themeSelect" style="font-family:'Verdana'">
+                                <option value="light" data-mode="light" style="font-family:'Verdana';">🌤️ light
+                                </option>
+                                <option value="dark" style="font-family:'Verdana'">🌙 dark</option>
+                                <option value="newyear" style="font-family:'Verdana'">🎆 new year</option>
+                                <option value="valentines" style="font-family:'Verdana'">💘 valentine's</option>
+                                <option value="pride" style="font-family:'Verdana'">🌈 pride</option>
+                                <option value="halloween" style="font-family:'Verdana'">🎃 halloween</option>
+                                <option value="christmas" style="font-family:'Verdana'">🎄 christmas</option>
+                            </select>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!--floating navicons-->
+    <div class="position-relative d-none d-xl-block">
+        <div class="position-fixed d-flex justify-content-center align-items-center floating-nav-container">
+            <div class="floating-nav-group">
+                <li class="nav-item px-2 py-3">
+                    <a href="feed.html" data-bs-toggle="tooltip" data-bs-custom-class="custom-tooltip" data-bs-placement="right"
+                        data-bs-title="Home">
+                        <i class="fa-solid fa-house floating-navicon navicon1"></i>
+                    </a>
+                </li>
+                <li class="nav-item px-2 py-3">
+                    <a href="library.html" data-bs-toggle="tooltip" data-bs-custom-class="custom-tooltip" data-bs-placement="right"
+                        data-bs-title="Library">
+                        <i class="fa-solid fa-book-bookmark floating-navicon navicon3"></i>
+                    </a>
+                </li>
+                <li class="nav-item px-2 py-3">
+                    <a href="challenges_all.html" data-bs-toggle="tooltip" data-bs-custom-class="custom-tooltip" data-bs-placement="right"
+                        data-bs-title="Challenges">
+                        <i class="fa-solid fa-chart-simple floating-navicon navicon4"></i>
+                    </a>
+                </li>
+                <li class="nav-item px-2 py-3">
+                    <a href="projects_all.html" data-bs-toggle="tooltip" data-bs-custom-class="custom-tooltip" data-bs-placement="right"
+                        data-bs-title="Projects">
+                        <i class="fa-solid fa-box-archive floating-navicon navicon2"></i>
+                    </a>
+                </li>
+            </div>
+        </div>
+    </div>
+
+    <!--content-->
+    <section class="section-content">
+
+        <input type="hidden" id="profiletheme" value="{{ user_profile_theme }}" />
+
+        <div class="content-wrapper d-flex justify-content-around">
+            <!--feed toggle buttons-->
+            <div class="content-wrapper-width">
+                <div class="container-fluid padding-0">
+                    <div class="row d-flex justify-content-between feed-header">
+                        <div class="col d-flex justify-content-sm-start justify-content-start">
+                            <div class="py-2">
+                                <ul class="nav nav-pills feed-toggle__accent4" id="feed-tab" role="tablist">
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link active" id="feed-discover-tab" data-bs-toggle="pill"
+                                            data-bs-target="#feed-discover" type="button" role="tab"
+                                            aria-controls="profile-home" aria-selected="true">
+                                            Discover
+                                        </button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="feed-following-tab" data-bs-toggle="pill"
+                                            data-bs-target="#feed-following" type="button" role="tab"
+                                            aria-controls="profile-contact" aria-selected="false">
+                                            Following
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col d-flex justify-content-sm-end justify-content-end">
+                            <div class="py-2 padding-0">
+                                <div class="d-flex justify-content-sm-end justify-content-end feed-toggle btn-a">
+                                    <a href="post_create.html">
+                                        <button class="btn">
+                                            <div class="py-2 px-3 post-btn"><i class="fa-solid fa-file-circle-plus"></i>
+                                                Post
+                                            </div>
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group-profile-body d-flex flex-column justify-content-center align-items-center">
+                    <div class="profile-body-content w-100">
+                        <div class="tab-content" id="feed-tabContent">
+                            <div class="tab-pane fade show active" id="feed-discover" role="tabpanel"
+                                aria-labelledby="feed-discover-tab" tabindex="0">
+                                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4">
+                                    <!-- DISCOVER start -->
+
+                                    <!--post start-->
+                                    <div class="col">
+                                        <div class="card shadow h-100">
+                                            <!--post img-->
+                                            <a href="#" class="card-img-top">
+                                                <img src="https://ladywithcraft.com/cdn/shop/files/00AC5E2F-7414-4856-A795-DF1CB972BF8D.jpg?v=1682438248"
+                                                    class="card-img-top" alt="Post Image" />
+                                            </a>
+                                            <!--post body-->
+                                            <div class="card-body rounded">
+                                                <div class="d-flex h-100">
+                                                    <div class="py-2">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <a href="#">
+                                                                    <img class="feedicon"
+                                                                        src="https://cdn.picrew.me/app/image_maker/696219/icon_EZdOOG8uvorfZktG.png" />
+                                                                    <!--post user icon-->
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        class="p-2 h-100 flex-grow-1 d-flex flex-column justify-content-between">
+                                                        <div class="wowowowow">
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <a href="#">
+                                                                        <h5 class="card-title card-title-hover h5">
+                                                                            Tulips</h5> <!--post title-->
+                                                                    </a>
+                                                                    <a href="#">
+                                                                        <small class="text-body-secondary">
+                                                                            <span
+                                                                                id="feed-username">@userbeginner</span>
+                                                                            <!--post username-->
+                                                                        </small>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row row-tags">
+                                                                <div class="col">
+                                                                    <small class="text-body-secondary">
+                                                                        <span class="feed-tag-group">
+                                                                            <!--post tags= group-->
+                                                                            <a href="#">
+                                                                                <span id="feed-tag"
+                                                                                    class="feed-tag">flowers</span>
+                                                                            </a>
+                                                                        </span>
+                                                                    </small>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <small class="h7-size d-block text-muted-color">January
+                                                                    1, 2024, 10:11 AM</small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="py-2 text-center">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <span id="feed-like-icon">
+                                                                    <button class="feed-like-button btn like-button"
+                                                                        data-post-id="{{ post.pk }}"
+                                                                        data-bs-toggle="tooltip"
+                                                                        data-bs-custom-class="custom-tooltip"
+                                                                        data-bs-placement="top" data-bs-title="Like">
+                                                                        <!--post like button-->
+                                                                        <i class="fa-solid fa-heart"></i>
+                                                                        <!--<i class="fa-regular fa-heart"></i>-->
+                                                                    </button>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <small class="text-muted-color">
+                                                                    <span id="like-count-{{ post.pk }}">12</span>
+                                                                    <!--post like counter-->
+                                                                </small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--
+                                    <div class="mb-2 d-flex justify-content-md-start justify-content-center">
+                                        <p class="h5-size">No posts found.</p>
+                                    </div>
+                                    -->
+                                    <!--post end-->
+                                    
+                                    <!-- copypasta start -->
+                                    <div class="col">
+                                        <div class="card shadow h-100">
+                                            <!--post img-->
+                                            <a href="#" class="card-img-top">
+                                                <img src="https://www.mariskavos.nl/wp-content/uploads/2023/01/free-cat-crochet-pattern-4.jpg"
+                                                    class="card-img-top" alt="Post Image" />
+                                            </a>
+                                            <!--post body-->
+                                            <div class="card-body rounded">
+                                                <div class="d-flex h-100">
+                                                    <div class="py-2">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <a href="#">
+                                                                    <img class="feedicon"
+                                                                        src="https://cdn.picrew.me/app/image_maker/696219/icon_EZdOOG8uvorfZktG.png" />
+                                                                    <!--post user icon-->
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        class="p-2 h-100 flex-grow-1 d-flex flex-column justify-content-between">
+                                                        <div class="wowowowow">
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <a href="#">
+                                                                        <h5 class="card-title card-title-hover h5">
+                                                                            Cats</h5> <!--post title-->
+                                                                    </a>
+                                                                    <a href="#">
+                                                                        <small class="text-body-secondary">
+                                                                            <span
+                                                                                id="feed-username">@userbeginner</span>
+                                                                            <!--post username-->
+                                                                        </small>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row row-tags">
+                                                                <div class="col">
+                                                                    <small class="text-body-secondary">
+                                                                        <span class="feed-tag-group">
+                                                                            <!--post tags= group-->
+                                                                            <a href="#">
+                                                                                <span id="feed-tag"
+                                                                                    class="feed-tag">flowers</span>
+                                                                            </a>
+                                                                        </span>
+                                                                    </small>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <small class="h7-size d-block text-muted-color">January
+                                                                    1, 2024, 10:11 AM</small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="py-2 text-center">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <span id="feed-like-icon">
+                                                                    <button class="feed-like-button btn like-button"
+                                                                        data-post-id="{{ post.pk }}"
+                                                                        data-bs-toggle="tooltip"
+                                                                        data-bs-custom-class="custom-tooltip"
+                                                                        data-bs-placement="top" data-bs-title="Like">
+                                                                        <!--post like button-->
+                                                                        <i class="fa-solid fa-heart"></i>
+                                                                        <!--<i class="fa-regular fa-heart"></i>-->
+                                                                    </button>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <small class="text-muted-color">
+                                                                    <span id="like-count-{{ post.pk }}">12</span>
+                                                                    <!--post like counter-->
+                                                                </small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col">
+                                        <div class="card shadow h-100">
+                                            <!--post img-->
+                                            <a href="#" class="card-img-top">
+                                                <img src="https://www.blingcute.com/cdn/shop/collections/20220502215217.jpg?v=1651723365"
+                                                    class="card-img-top" alt="Post Image" />
+                                            </a>
+                                            <!--post body-->
+                                            <div class="card-body rounded">
+                                                <div class="d-flex h-100">
+                                                    <div class="py-2">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <a href="#">
+                                                                    <img class="feedicon"
+                                                                        src="https://cdn.picrew.me/app/image_maker/696219/icon_EZdOOG8uvorfZktG.png" />
+                                                                    <!--post user icon-->
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        class="p-2 h-100 flex-grow-1 d-flex flex-column justify-content-between">
+                                                        <div class="wowowowow">
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <a href="#">
+                                                                        <h5 class="card-title card-title-hover h5">
+                                                                            Bag</h5> <!--post title-->
+                                                                    </a>
+                                                                    <a href="#">
+                                                                        <small class="text-body-secondary">
+                                                                            <span
+                                                                                id="feed-username">@userbeginner</span>
+                                                                            <!--post username-->
+                                                                        </small>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row row-tags">
+                                                                <div class="col">
+                                                                    <small class="text-body-secondary">
+                                                                        <span class="feed-tag-group">
+                                                                            <!--post tags= group-->
+                                                                            <a href="#">
+                                                                                <span id="feed-tag"
+                                                                                    class="feed-tag">flowers</span>
+                                                                            </a>
+                                                                        </span>
+                                                                    </small>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <small class="h7-size d-block text-muted-color">January
+                                                                    1, 2024, 10:11 AM</small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="py-2 text-center">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <span id="feed-like-icon">
+                                                                    <button class="feed-like-button btn like-button"
+                                                                        data-post-id="{{ post.pk }}"
+                                                                        data-bs-toggle="tooltip"
+                                                                        data-bs-custom-class="custom-tooltip"
+                                                                        data-bs-placement="top" data-bs-title="Like">
+                                                                        <!--post like button-->
+                                                                        <i class="fa-solid fa-heart"></i>
+                                                                        <!--<i class="fa-regular fa-heart"></i>-->
+                                                                    </button>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <small class="text-muted-color">
+                                                                    <span id="like-count-{{ post.pk }}">12</span>
+                                                                    <!--post like counter-->
+                                                                </small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col">
+                                        <div class="card shadow h-100">
+                                            <!--post img-->
+                                            <a href="#" class="card-img-top">
+                                                <img src="https://ladywithcraft.com/cdn/shop/files/00AC5E2F-7414-4856-A795-DF1CB972BF8D.jpg?v=1682438248"
+                                                    class="card-img-top" alt="Post Image" />
+                                            </a>
+                                            <!--post body-->
+                                            <div class="card-body rounded">
+                                                <div class="d-flex h-100">
+                                                    <div class="py-2">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <a href="#">
+                                                                    <img class="feedicon"
+                                                                        src="https://cdn.picrew.me/app/image_maker/696219/icon_EZdOOG8uvorfZktG.png" />
+                                                                    <!--post user icon-->
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        class="p-2 h-100 flex-grow-1 d-flex flex-column justify-content-between">
+                                                        <div class="wowowowow">
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <a href="#">
+                                                                        <h5 class="card-title card-title-hover h5">
+                                                                            Tulips</h5> <!--post title-->
+                                                                    </a>
+                                                                    <a href="#">
+                                                                        <small class="text-body-secondary">
+                                                                            <span
+                                                                                id="feed-username">@userbeginner</span>
+                                                                            <!--post username-->
+                                                                        </small>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row row-tags">
+                                                                <div class="col">
+                                                                    <small class="text-body-secondary">
+                                                                        <span class="feed-tag-group">
+                                                                            <!--post tags= group-->
+                                                                            <a href="#">
+                                                                                <span id="feed-tag"
+                                                                                    class="feed-tag">flowers</span>
+                                                                            </a>
+                                                                        </span>
+                                                                    </small>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <small class="h7-size d-block text-muted-color">January
+                                                                    1, 2024, 10:11 AM</small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="py-2 text-center">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <span id="feed-like-icon">
+                                                                    <button class="feed-like-button btn like-button"
+                                                                        data-post-id="{{ post.pk }}"
+                                                                        data-bs-toggle="tooltip"
+                                                                        data-bs-custom-class="custom-tooltip"
+                                                                        data-bs-placement="top" data-bs-title="Like">
+                                                                        <!--post like button-->
+                                                                        <i class="fa-solid fa-heart"></i>
+                                                                        <!--<i class="fa-regular fa-heart"></i>-->
+                                                                    </button>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <small class="text-muted-color">
+                                                                    <span id="like-count-{{ post.pk }}">12</span>
+                                                                    <!--post like counter-->
+                                                                </small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col">
+                                        <div class="card shadow h-100">
+                                            <!--post img-->
+                                            <a href="#" class="card-img-top">
+                                                <img src="https://www.mariskavos.nl/wp-content/uploads/2023/01/free-cat-crochet-pattern-4.jpg"
+                                                    class="card-img-top" alt="Post Image" />
+                                            </a>
+                                            <!--post body-->
+                                            <div class="card-body rounded">
+                                                <div class="d-flex h-100">
+                                                    <div class="py-2">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <a href="#">
+                                                                    <img class="feedicon"
+                                                                        src="https://cdn.picrew.me/app/image_maker/696219/icon_EZdOOG8uvorfZktG.png" />
+                                                                    <!--post user icon-->
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        class="p-2 h-100 flex-grow-1 d-flex flex-column justify-content-between">
+                                                        <div class="wowowowow">
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <a href="#">
+                                                                        <h5 class="card-title card-title-hover h5">
+                                                                            Cats</h5> <!--post title-->
+                                                                    </a>
+                                                                    <a href="#">
+                                                                        <small class="text-body-secondary">
+                                                                            <span
+                                                                                id="feed-username">@userbeginner</span>
+                                                                            <!--post username-->
+                                                                        </small>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row row-tags">
+                                                                <div class="col">
+                                                                    <small class="text-body-secondary">
+                                                                        <span class="feed-tag-group">
+                                                                            <!--post tags= group-->
+                                                                            <a href="#">
+                                                                                <span id="feed-tag"
+                                                                                    class="feed-tag">flowers</span>
+                                                                            </a>
+                                                                        </span>
+                                                                    </small>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <small class="h7-size d-block text-muted-color">January
+                                                                    1, 2024, 10:11 AM</small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="py-2 text-center">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <span id="feed-like-icon">
+                                                                    <button class="feed-like-button btn like-button"
+                                                                        data-post-id="{{ post.pk }}"
+                                                                        data-bs-toggle="tooltip"
+                                                                        data-bs-custom-class="custom-tooltip"
+                                                                        data-bs-placement="top" data-bs-title="Like">
+                                                                        <!--post like button-->
+                                                                        <i class="fa-solid fa-heart"></i>
+                                                                        <!--<i class="fa-regular fa-heart"></i>-->
+                                                                    </button>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <small class="text-muted-color">
+                                                                    <span id="like-count-{{ post.pk }}">12</span>
+                                                                    <!--post like counter-->
+                                                                </small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col">
+                                        <div class="card shadow h-100">
+                                            <!--post img-->
+                                            <a href="#" class="card-img-top">
+                                                <img src="https://www.blingcute.com/cdn/shop/collections/20220502215217.jpg?v=1651723365"
+                                                    class="card-img-top" alt="Post Image" />
+                                            </a>
+                                            <!--post body-->
+                                            <div class="card-body rounded">
+                                                <div class="d-flex h-100">
+                                                    <div class="py-2">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <a href="#">
+                                                                    <img class="feedicon"
+                                                                        src="https://cdn.picrew.me/app/image_maker/696219/icon_EZdOOG8uvorfZktG.png" />
+                                                                    <!--post user icon-->
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        class="p-2 h-100 flex-grow-1 d-flex flex-column justify-content-between">
+                                                        <div class="wowowowow">
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <a href="#">
+                                                                        <h5 class="card-title card-title-hover h5">
+                                                                            Bag</h5> <!--post title-->
+                                                                    </a>
+                                                                    <a href="#">
+                                                                        <small class="text-body-secondary">
+                                                                            <span
+                                                                                id="feed-username">@userbeginner</span>
+                                                                            <!--post username-->
+                                                                        </small>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row row-tags">
+                                                                <div class="col">
+                                                                    <small class="text-body-secondary">
+                                                                        <span class="feed-tag-group">
+                                                                            <!--post tags= group-->
+                                                                            <a href="#">
+                                                                                <span id="feed-tag"
+                                                                                    class="feed-tag">flowers</span>
+                                                                            </a>
+                                                                        </span>
+                                                                    </small>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <small class="h7-size d-block text-muted-color">January
+                                                                    1, 2024, 10:11 AM</small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="py-2 text-center">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <span id="feed-like-icon">
+                                                                    <button class="feed-like-button btn like-button"
+                                                                        data-post-id="{{ post.pk }}"
+                                                                        data-bs-toggle="tooltip"
+                                                                        data-bs-custom-class="custom-tooltip"
+                                                                        data-bs-placement="top" data-bs-title="Like">
+                                                                        <!--post like button-->
+                                                                        <i class="fa-solid fa-heart"></i>
+                                                                        <!--<i class="fa-regular fa-heart"></i>-->
+                                                                    </button>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <small class="text-muted-color">
+                                                                    <span id="like-count-{{ post.pk }}">12</span>
+                                                                    <!--post like counter-->
+                                                                </small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col">
+                                        <div class="card shadow h-100">
+                                            <!--post img-->
+                                            <a href="#" class="card-img-top">
+                                                <img src="https://ladywithcraft.com/cdn/shop/files/00AC5E2F-7414-4856-A795-DF1CB972BF8D.jpg?v=1682438248"
+                                                    class="card-img-top" alt="Post Image" />
+                                            </a>
+                                            <!--post body-->
+                                            <div class="card-body rounded">
+                                                <div class="d-flex h-100">
+                                                    <div class="py-2">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <a href="#">
+                                                                    <img class="feedicon"
+                                                                        src="https://cdn.picrew.me/app/image_maker/696219/icon_EZdOOG8uvorfZktG.png" />
+                                                                    <!--post user icon-->
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        class="p-2 h-100 flex-grow-1 d-flex flex-column justify-content-between">
+                                                        <div class="wowowowow">
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <a href="#">
+                                                                        <h5 class="card-title card-title-hover h5">
+                                                                            Tulips</h5> <!--post title-->
+                                                                    </a>
+                                                                    <a href="#">
+                                                                        <small class="text-body-secondary">
+                                                                            <span
+                                                                                id="feed-username">@userbeginner</span>
+                                                                            <!--post username-->
+                                                                        </small>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row row-tags">
+                                                                <div class="col">
+                                                                    <small class="text-body-secondary">
+                                                                        <span class="feed-tag-group">
+                                                                            <!--post tags= group-->
+                                                                            <a href="#">
+                                                                                <span id="feed-tag"
+                                                                                    class="feed-tag">flowers</span>
+                                                                            </a>
+                                                                        </span>
+                                                                    </small>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <small class="h7-size d-block text-muted-color">January
+                                                                    1, 2024, 10:11 AM</small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="py-2 text-center">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <span id="feed-like-icon">
+                                                                    <button class="feed-like-button btn like-button"
+                                                                        data-post-id="{{ post.pk }}"
+                                                                        data-bs-toggle="tooltip"
+                                                                        data-bs-custom-class="custom-tooltip"
+                                                                        data-bs-placement="top" data-bs-title="Like">
+                                                                        <!--post like button-->
+                                                                        <i class="fa-solid fa-heart"></i>
+                                                                        <!--<i class="fa-regular fa-heart"></i>-->
+                                                                    </button>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <small class="text-muted-color">
+                                                                    <span id="like-count-{{ post.pk }}">12</span>
+                                                                    <!--post like counter-->
+                                                                </small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col">
+                                        <div class="card shadow h-100">
+                                            <!--post img-->
+                                            <a href="#" class="card-img-top">
+                                                <img src="https://www.mariskavos.nl/wp-content/uploads/2023/01/free-cat-crochet-pattern-4.jpg"
+                                                    class="card-img-top" alt="Post Image" />
+                                            </a>
+                                            <!--post body-->
+                                            <div class="card-body rounded">
+                                                <div class="d-flex h-100">
+                                                    <div class="py-2">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <a href="#">
+                                                                    <img class="feedicon"
+                                                                        src="https://cdn.picrew.me/app/image_maker/696219/icon_EZdOOG8uvorfZktG.png" />
+                                                                    <!--post user icon-->
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        class="p-2 h-100 flex-grow-1 d-flex flex-column justify-content-between">
+                                                        <div class="wowowowow">
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <a href="#">
+                                                                        <h5 class="card-title card-title-hover h5">
+                                                                            Cats</h5> <!--post title-->
+                                                                    </a>
+                                                                    <a href="#">
+                                                                        <small class="text-body-secondary">
+                                                                            <span
+                                                                                id="feed-username">@userbeginner</span>
+                                                                            <!--post username-->
+                                                                        </small>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row row-tags">
+                                                                <div class="col">
+                                                                    <small class="text-body-secondary">
+                                                                        <span class="feed-tag-group">
+                                                                            <!--post tags= group-->
+                                                                            <a href="#">
+                                                                                <span id="feed-tag"
+                                                                                    class="feed-tag">flowers</span>
+                                                                            </a>
+                                                                        </span>
+                                                                    </small>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <small class="h7-size d-block text-muted-color">January
+                                                                    1, 2024, 10:11 AM</small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="py-2 text-center">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <span id="feed-like-icon">
+                                                                    <button class="feed-like-button btn like-button"
+                                                                        data-post-id="{{ post.pk }}"
+                                                                        data-bs-toggle="tooltip"
+                                                                        data-bs-custom-class="custom-tooltip"
+                                                                        data-bs-placement="top" data-bs-title="Like">
+                                                                        <!--post like button-->
+                                                                        <i class="fa-solid fa-heart"></i>
+                                                                        <!--<i class="fa-regular fa-heart"></i>-->
+                                                                    </button>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <small class="text-muted-color">
+                                                                    <span id="like-count-{{ post.pk }}">12</span>
+                                                                    <!--post like counter-->
+                                                                </small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col">
+                                        <div class="card shadow h-100">
+                                            <!--post img-->
+                                            <a href="#" class="card-img-top">
+                                                <img src="https://www.blingcute.com/cdn/shop/collections/20220502215217.jpg?v=1651723365"
+                                                    class="card-img-top" alt="Post Image" />
+                                            </a>
+                                            <!--post body-->
+                                            <div class="card-body rounded">
+                                                <div class="d-flex h-100">
+                                                    <div class="py-2">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <a href="#">
+                                                                    <img class="feedicon"
+                                                                        src="https://cdn.picrew.me/app/image_maker/696219/icon_EZdOOG8uvorfZktG.png" />
+                                                                    <!--post user icon-->
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        class="p-2 h-100 flex-grow-1 d-flex flex-column justify-content-between">
+                                                        <div class="wowowowow">
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <a href="#">
+                                                                        <h5 class="card-title card-title-hover h5">
+                                                                            Bag</h5> <!--post title-->
+                                                                    </a>
+                                                                    <a href="#">
+                                                                        <small class="text-body-secondary">
+                                                                            <span
+                                                                                id="feed-username">@userbeginner</span>
+                                                                            <!--post username-->
+                                                                        </small>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row row-tags">
+                                                                <div class="col">
+                                                                    <small class="text-body-secondary">
+                                                                        <span class="feed-tag-group">
+                                                                            <!--post tags= group-->
+                                                                            <a href="#">
+                                                                                <span id="feed-tag"
+                                                                                    class="feed-tag">flowers</span>
+                                                                            </a>
+                                                                        </span>
+                                                                    </small>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <small class="h7-size d-block text-muted-color">January
+                                                                    1, 2024, 10:11 AM</small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="py-2 text-center">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <span id="feed-like-icon">
+                                                                    <button class="feed-like-button btn like-button"
+                                                                        data-post-id="{{ post.pk }}"
+                                                                        data-bs-toggle="tooltip"
+                                                                        data-bs-custom-class="custom-tooltip"
+                                                                        data-bs-placement="top" data-bs-title="Like">
+                                                                        <!--post like button-->
+                                                                        <i class="fa-solid fa-heart"></i>
+                                                                        <!--<i class="fa-regular fa-heart"></i>-->
+                                                                    </button>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <small class="text-muted-color">
+                                                                    <span id="like-count-{{ post.pk }}">12</span>
+                                                                    <!--post like counter-->
+                                                                </small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col">
+                                        <div class="card shadow h-100">
+                                            <!--post img-->
+                                            <a href="#" class="card-img-top">
+                                                <img src="https://ladywithcraft.com/cdn/shop/files/00AC5E2F-7414-4856-A795-DF1CB972BF8D.jpg?v=1682438248"
+                                                    class="card-img-top" alt="Post Image" />
+                                            </a>
+                                            <!--post body-->
+                                            <div class="card-body rounded">
+                                                <div class="d-flex h-100">
+                                                    <div class="py-2">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <a href="#">
+                                                                    <img class="feedicon"
+                                                                        src="https://cdn.picrew.me/app/image_maker/696219/icon_EZdOOG8uvorfZktG.png" />
+                                                                    <!--post user icon-->
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        class="p-2 h-100 flex-grow-1 d-flex flex-column justify-content-between">
+                                                        <div class="wowowowow">
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <a href="#">
+                                                                        <h5 class="card-title card-title-hover h5">
+                                                                            Tulips</h5> <!--post title-->
+                                                                    </a>
+                                                                    <a href="#">
+                                                                        <small class="text-body-secondary">
+                                                                            <span
+                                                                                id="feed-username">@userbeginner</span>
+                                                                            <!--post username-->
+                                                                        </small>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row row-tags">
+                                                                <div class="col">
+                                                                    <small class="text-body-secondary">
+                                                                        <span class="feed-tag-group">
+                                                                            <!--post tags= group-->
+                                                                            <a href="#">
+                                                                                <span id="feed-tag"
+                                                                                    class="feed-tag">flowers</span>
+                                                                            </a>
+                                                                        </span>
+                                                                    </small>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <small class="h7-size d-block text-muted-color">January
+                                                                    1, 2024, 10:11 AM</small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="py-2 text-center">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <span id="feed-like-icon">
+                                                                    <button class="feed-like-button btn like-button"
+                                                                        data-post-id="{{ post.pk }}"
+                                                                        data-bs-toggle="tooltip"
+                                                                        data-bs-custom-class="custom-tooltip"
+                                                                        data-bs-placement="top" data-bs-title="Like">
+                                                                        <!--post like button-->
+                                                                        <i class="fa-solid fa-heart"></i>
+                                                                        <!--<i class="fa-regular fa-heart"></i>-->
+                                                                    </button>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <small class="text-muted-color">
+                                                                    <span id="like-count-{{ post.pk }}">12</span>
+                                                                    <!--post like counter-->
+                                                                </small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col">
+                                        <div class="card shadow h-100">
+                                            <!--post img-->
+                                            <a href="#" class="card-img-top">
+                                                <img src="https://www.mariskavos.nl/wp-content/uploads/2023/01/free-cat-crochet-pattern-4.jpg"
+                                                    class="card-img-top" alt="Post Image" />
+                                            </a>
+                                            <!--post body-->
+                                            <div class="card-body rounded">
+                                                <div class="d-flex h-100">
+                                                    <div class="py-2">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <a href="#">
+                                                                    <img class="feedicon"
+                                                                        src="https://cdn.picrew.me/app/image_maker/696219/icon_EZdOOG8uvorfZktG.png" />
+                                                                    <!--post user icon-->
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        class="p-2 h-100 flex-grow-1 d-flex flex-column justify-content-between">
+                                                        <div class="wowowowow">
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <a href="#">
+                                                                        <h5 class="card-title card-title-hover h5">
+                                                                            Cats</h5> <!--post title-->
+                                                                    </a>
+                                                                    <a href="#">
+                                                                        <small class="text-body-secondary">
+                                                                            <span
+                                                                                id="feed-username">@userbeginner</span>
+                                                                            <!--post username-->
+                                                                        </small>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row row-tags">
+                                                                <div class="col">
+                                                                    <small class="text-body-secondary">
+                                                                        <span class="feed-tag-group">
+                                                                            <!--post tags= group-->
+                                                                            <a href="#">
+                                                                                <span id="feed-tag"
+                                                                                    class="feed-tag">flowers</span>
+                                                                            </a>
+                                                                        </span>
+                                                                    </small>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <small class="h7-size d-block text-muted-color">January
+                                                                    1, 2024, 10:11 AM</small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="py-2 text-center">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <span id="feed-like-icon">
+                                                                    <button class="feed-like-button btn like-button"
+                                                                        data-post-id="{{ post.pk }}"
+                                                                        data-bs-toggle="tooltip"
+                                                                        data-bs-custom-class="custom-tooltip"
+                                                                        data-bs-placement="top" data-bs-title="Like">
+                                                                        <!--post like button-->
+                                                                        <i class="fa-solid fa-heart"></i>
+                                                                        <!--<i class="fa-regular fa-heart"></i>-->
+                                                                    </button>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <small class="text-muted-color">
+                                                                    <span id="like-count-{{ post.pk }}">12</span>
+                                                                    <!--post like counter-->
+                                                                </small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col">
+                                        <div class="card shadow h-100">
+                                            <!--post img-->
+                                            <a href="#" class="card-img-top">
+                                                <img src="https://www.blingcute.com/cdn/shop/collections/20220502215217.jpg?v=1651723365"
+                                                    class="card-img-top" alt="Post Image" />
+                                            </a>
+                                            <!--post body-->
+                                            <div class="card-body rounded">
+                                                <div class="d-flex h-100">
+                                                    <div class="py-2">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <a href="#">
+                                                                    <img class="feedicon"
+                                                                        src="https://cdn.picrew.me/app/image_maker/696219/icon_EZdOOG8uvorfZktG.png" />
+                                                                    <!--post user icon-->
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        class="p-2 h-100 flex-grow-1 d-flex flex-column justify-content-between">
+                                                        <div class="wowowowow">
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <a href="#">
+                                                                        <h5 class="card-title card-title-hover h5">
+                                                                            Bag</h5> <!--post title-->
+                                                                    </a>
+                                                                    <a href="#">
+                                                                        <small class="text-body-secondary">
+                                                                            <span
+                                                                                id="feed-username">@userbeginner</span>
+                                                                            <!--post username-->
+                                                                        </small>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row row-tags">
+                                                                <div class="col">
+                                                                    <small class="text-body-secondary">
+                                                                        <span class="feed-tag-group">
+                                                                            <!--post tags= group-->
+                                                                            <a href="#">
+                                                                                <span id="feed-tag"
+                                                                                    class="feed-tag">flowers</span>
+                                                                            </a>
+                                                                        </span>
+                                                                    </small>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <small class="h7-size d-block text-muted-color">January
+                                                                    1, 2024, 10:11 AM</small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="py-2 text-center">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <span id="feed-like-icon">
+                                                                    <button class="feed-like-button btn like-button"
+                                                                        data-post-id="{{ post.pk }}"
+                                                                        data-bs-toggle="tooltip"
+                                                                        data-bs-custom-class="custom-tooltip"
+                                                                        data-bs-placement="top" data-bs-title="Like">
+                                                                        <!--post like button-->
+                                                                        <i class="fa-solid fa-heart"></i>
+                                                                        <!--<i class="fa-regular fa-heart"></i>-->
+                                                                    </button>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <small class="text-muted-color">
+                                                                    <span id="like-count-{{ post.pk }}">12</span>
+                                                                    <!--post like counter-->
+                                                                </small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col">
+                                        <div class="card shadow h-100">
+                                            <!--post img-->
+                                            <a href="#" class="card-img-top">
+                                                <img src="https://ladywithcraft.com/cdn/shop/files/00AC5E2F-7414-4856-A795-DF1CB972BF8D.jpg?v=1682438248"
+                                                    class="card-img-top" alt="Post Image" />
+                                            </a>
+                                            <!--post body-->
+                                            <div class="card-body rounded">
+                                                <div class="d-flex h-100">
+                                                    <div class="py-2">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <a href="#">
+                                                                    <img class="feedicon"
+                                                                        src="https://cdn.picrew.me/app/image_maker/696219/icon_EZdOOG8uvorfZktG.png" />
+                                                                    <!--post user icon-->
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        class="p-2 h-100 flex-grow-1 d-flex flex-column justify-content-between">
+                                                        <div class="wowowowow">
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <a href="#">
+                                                                        <h5 class="card-title card-title-hover h5">
+                                                                            Tulips</h5> <!--post title-->
+                                                                    </a>
+                                                                    <a href="#">
+                                                                        <small class="text-body-secondary">
+                                                                            <span
+                                                                                id="feed-username">@userbeginner</span>
+                                                                            <!--post username-->
+                                                                        </small>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row row-tags">
+                                                                <div class="col">
+                                                                    <small class="text-body-secondary">
+                                                                        <span class="feed-tag-group">
+                                                                            <!--post tags= group-->
+                                                                            <a href="#">
+                                                                                <span id="feed-tag"
+                                                                                    class="feed-tag">flowers</span>
+                                                                            </a>
+                                                                        </span>
+                                                                    </small>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <small class="h7-size d-block text-muted-color">January
+                                                                    1, 2024, 10:11 AM</small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="py-2 text-center">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <span id="feed-like-icon">
+                                                                    <button class="feed-like-button btn like-button"
+                                                                        data-post-id="{{ post.pk }}"
+                                                                        data-bs-toggle="tooltip"
+                                                                        data-bs-custom-class="custom-tooltip"
+                                                                        data-bs-placement="top" data-bs-title="Like">
+                                                                        <!--post like button-->
+                                                                        <i class="fa-solid fa-heart"></i>
+                                                                        <!--<i class="fa-regular fa-heart"></i>-->
+                                                                    </button>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <small class="text-muted-color">
+                                                                    <span id="like-count-{{ post.pk }}">12</span>
+                                                                    <!--post like counter-->
+                                                                </small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col">
+                                        <div class="card shadow h-100">
+                                            <!--post img-->
+                                            <a href="#" class="card-img-top">
+                                                <img src="https://www.mariskavos.nl/wp-content/uploads/2023/01/free-cat-crochet-pattern-4.jpg"
+                                                    class="card-img-top" alt="Post Image" />
+                                            </a>
+                                            <!--post body-->
+                                            <div class="card-body rounded">
+                                                <div class="d-flex h-100">
+                                                    <div class="py-2">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <a href="#">
+                                                                    <img class="feedicon"
+                                                                        src="https://cdn.picrew.me/app/image_maker/696219/icon_EZdOOG8uvorfZktG.png" />
+                                                                    <!--post user icon-->
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        class="p-2 h-100 flex-grow-1 d-flex flex-column justify-content-between">
+                                                        <div class="wowowowow">
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <a href="#">
+                                                                        <h5 class="card-title card-title-hover h5">
+                                                                            Cats</h5> <!--post title-->
+                                                                    </a>
+                                                                    <a href="#">
+                                                                        <small class="text-body-secondary">
+                                                                            <span
+                                                                                id="feed-username">@userbeginner</span>
+                                                                            <!--post username-->
+                                                                        </small>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row row-tags">
+                                                                <div class="col">
+                                                                    <small class="text-body-secondary">
+                                                                        <span class="feed-tag-group">
+                                                                            <!--post tags= group-->
+                                                                            <a href="#">
+                                                                                <span id="feed-tag"
+                                                                                    class="feed-tag">flowers</span>
+                                                                            </a>
+                                                                        </span>
+                                                                    </small>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <small class="h7-size d-block text-muted-color">January
+                                                                    1, 2024, 10:11 AM</small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="py-2 text-center">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <span id="feed-like-icon">
+                                                                    <button class="feed-like-button btn like-button"
+                                                                        data-post-id="{{ post.pk }}"
+                                                                        data-bs-toggle="tooltip"
+                                                                        data-bs-custom-class="custom-tooltip"
+                                                                        data-bs-placement="top" data-bs-title="Like">
+                                                                        <!--post like button-->
+                                                                        <i class="fa-solid fa-heart"></i>
+                                                                        <!--<i class="fa-regular fa-heart"></i>-->
+                                                                    </button>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <small class="text-muted-color">
+                                                                    <span id="like-count-{{ post.pk }}">12</span>
+                                                                    <!--post like counter-->
+                                                                </small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col">
+                                        <div class="card shadow h-100">
+                                            <!--post img-->
+                                            <a href="#" class="card-img-top">
+                                                <img src="https://www.blingcute.com/cdn/shop/collections/20220502215217.jpg?v=1651723365"
+                                                    class="card-img-top" alt="Post Image" />
+                                            </a>
+                                            <!--post body-->
+                                            <div class="card-body rounded">
+                                                <div class="d-flex h-100">
+                                                    <div class="py-2">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <a href="#">
+                                                                    <img class="feedicon"
+                                                                        src="https://cdn.picrew.me/app/image_maker/696219/icon_EZdOOG8uvorfZktG.png" />
+                                                                    <!--post user icon-->
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        class="p-2 h-100 flex-grow-1 d-flex flex-column justify-content-between">
+                                                        <div class="wowowowow">
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <a href="#">
+                                                                        <h5 class="card-title card-title-hover h5">
+                                                                            Bag</h5> <!--post title-->
+                                                                    </a>
+                                                                    <a href="#">
+                                                                        <small class="text-body-secondary">
+                                                                            <span
+                                                                                id="feed-username">@userbeginner</span>
+                                                                            <!--post username-->
+                                                                        </small>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row row-tags">
+                                                                <div class="col">
+                                                                    <small class="text-body-secondary">
+                                                                        <span class="feed-tag-group">
+                                                                            <!--post tags= group-->
+                                                                            <a href="#">
+                                                                                <span id="feed-tag"
+                                                                                    class="feed-tag">flowers</span>
+                                                                            </a>
+                                                                        </span>
+                                                                    </small>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <small class="h7-size d-block text-muted-color">January
+                                                                    1, 2024, 10:11 AM</small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="py-2 text-center">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <span id="feed-like-icon">
+                                                                    <button class="feed-like-button btn like-button"
+                                                                        data-post-id="{{ post.pk }}"
+                                                                        data-bs-toggle="tooltip"
+                                                                        data-bs-custom-class="custom-tooltip"
+                                                                        data-bs-placement="top" data-bs-title="Like">
+                                                                        <!--post like button-->
+                                                                        <i class="fa-solid fa-heart"></i>
+                                                                        <!--<i class="fa-regular fa-heart"></i>-->
+                                                                    </button>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <small class="text-muted-color">
+                                                                    <span id="like-count-{{ post.pk }}">12</span>
+                                                                    <!--post like counter-->
+                                                                </small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- copypasta end -->
+
+                                    <!-- DISCOVER end -->
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="feed-following" role="tabpanel"
+                                aria-labelledby="feed-following-tab" tabindex="0">
+                                <div
+                                    class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4 w-100">
+                                    <!-- FOLLOWING start -->
+                                    <div class="col">
+                                        <div class="card shadow h-100">
+                                            <!--post img-->
+                                            <a href="#" class="card-img-top">
+                                                <img src="https://storage.googleapis.com/ribblr-disk/pics/14171/cover-863ra1l7e.jpg"
+                                                    class="card-img-top" alt="Post Image" />
+                                            </a>
+                                            <!--post body-->
+                                            <div class="card-body rounded">
+                                                <div class="d-flex h-100">
+                                                    <div class="py-2">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <a href="#">
+                                                                    <img class="feedicon"
+                                                                        src="https://cdn.picrew.me/app/image_maker/696219/icon_EZdOOG8uvorfZktG.png" />
+                                                                    <!--post user icon-->
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        class="p-2 h-100 flex-grow-1 d-flex flex-column justify-content-between">
+                                                        <div class="wowowowow">
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <a href="#">
+                                                                        <h5 class="card-title card-title-hover h5">
+                                                                            Tulips</h5> <!--post title-->
+                                                                    </a>
+                                                                    <a href="#">
+                                                                        <small class="text-body-secondary">
+                                                                            <span
+                                                                                id="feed-username">@userbeginner</span>
+                                                                            <!--post username-->
+                                                                        </small>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row row-tags">
+                                                                <div class="col">
+                                                                    <small class="text-body-secondary">
+                                                                        <span class="feed-tag-group">
+                                                                            <!--post tags= group-->
+                                                                            <a href="#">
+                                                                                <span id="feed-tag"
+                                                                                    class="feed-tag">flowers</span>
+                                                                            </a>
+                                                                        </span>
+                                                                    </small>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <small class="h7-size d-block text-muted-color">January
+                                                                    1, 2024, 10:11 AM</small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="py-2 text-center">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <span id="feed-like-icon">
+                                                                    <button class="feed-like-button btn like-button"
+                                                                        data-post-id="{{ post.pk }}"
+                                                                        data-bs-toggle="tooltip"
+                                                                        data-bs-custom-class="custom-tooltip"
+                                                                        data-bs-placement="top" data-bs-title="Like">
+                                                                        <!--post like button-->
+                                                                        <i class="fa-solid fa-heart"></i>
+                                                                        <!--<i class="fa-regular fa-heart"></i>-->
+                                                                    </button>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <small class="text-muted-color">
+                                                                    <span id="like-count-{{ post.pk }}">12</span>
+                                                                    <!--post like counter-->
+                                                                </small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- FOLLOWING end -->
+                                    
+                                    <!-- copypasta start -->
+                                    <div class="col">
+                                        <div class="card shadow h-100">
+                                            <!--post img-->
+                                            <a href="#" class="card-img-top">
+                                                <img src="https://www.mariskavos.nl/wp-content/uploads/2023/01/free-cat-crochet-pattern-4.jpg"
+                                                    class="card-img-top" alt="Post Image" />
+                                            </a>
+                                            <!--post body-->
+                                            <div class="card-body rounded">
+                                                <div class="d-flex h-100">
+                                                    <div class="py-2">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <a href="#">
+                                                                    <img class="feedicon"
+                                                                        src="https://cdn.picrew.me/app/image_maker/696219/icon_EZdOOG8uvorfZktG.png" />
+                                                                    <!--post user icon-->
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        class="p-2 h-100 flex-grow-1 d-flex flex-column justify-content-between">
+                                                        <div class="wowowowow">
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <a href="#">
+                                                                        <h5 class="card-title card-title-hover h5">
+                                                                            Cats</h5> <!--post title-->
+                                                                    </a>
+                                                                    <a href="#">
+                                                                        <small class="text-body-secondary">
+                                                                            <span
+                                                                                id="feed-username">@userbeginner</span>
+                                                                            <!--post username-->
+                                                                        </small>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row row-tags">
+                                                                <div class="col">
+                                                                    <small class="text-body-secondary">
+                                                                        <span class="feed-tag-group">
+                                                                            <!--post tags= group-->
+                                                                            <a href="#">
+                                                                                <span id="feed-tag"
+                                                                                    class="feed-tag">flowers</span>
+                                                                            </a>
+                                                                        </span>
+                                                                    </small>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <small class="h7-size d-block text-muted-color">January
+                                                                    1, 2024, 10:11 AM</small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="py-2 text-center">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <span id="feed-like-icon">
+                                                                    <button class="feed-like-button btn like-button"
+                                                                        data-post-id="{{ post.pk }}"
+                                                                        data-bs-toggle="tooltip"
+                                                                        data-bs-custom-class="custom-tooltip"
+                                                                        data-bs-placement="top" data-bs-title="Like">
+                                                                        <!--post like button-->
+                                                                        <i class="fa-solid fa-heart"></i>
+                                                                        <!--<i class="fa-regular fa-heart"></i>-->
+                                                                    </button>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <small class="text-muted-color">
+                                                                    <span id="like-count-{{ post.pk }}">12</span>
+                                                                    <!--post like counter-->
+                                                                </small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col">
+                                        <div class="card shadow h-100">
+                                            <!--post img-->
+                                            <a href="#" class="card-img-top">
+                                                <img src="https://www.blingcute.com/cdn/shop/collections/20220502215217.jpg?v=1651723365"
+                                                    class="card-img-top" alt="Post Image" />
+                                            </a>
+                                            <!--post body-->
+                                            <div class="card-body rounded">
+                                                <div class="d-flex h-100">
+                                                    <div class="py-2">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <a href="#">
+                                                                    <img class="feedicon"
+                                                                        src="https://cdn.picrew.me/app/image_maker/696219/icon_EZdOOG8uvorfZktG.png" />
+                                                                    <!--post user icon-->
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        class="p-2 h-100 flex-grow-1 d-flex flex-column justify-content-between">
+                                                        <div class="wowowowow">
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <a href="#">
+                                                                        <h5 class="card-title card-title-hover h5">
+                                                                            Bag</h5> <!--post title-->
+                                                                    </a>
+                                                                    <a href="#">
+                                                                        <small class="text-body-secondary">
+                                                                            <span
+                                                                                id="feed-username">@userbeginner</span>
+                                                                            <!--post username-->
+                                                                        </small>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row row-tags">
+                                                                <div class="col">
+                                                                    <small class="text-body-secondary">
+                                                                        <span class="feed-tag-group">
+                                                                            <!--post tags= group-->
+                                                                            <a href="#">
+                                                                                <span id="feed-tag"
+                                                                                    class="feed-tag">flowers</span>
+                                                                            </a>
+                                                                        </span>
+                                                                    </small>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <small class="h7-size d-block text-muted-color">January
+                                                                    1, 2024, 10:11 AM</small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="py-2 text-center">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <span id="feed-like-icon">
+                                                                    <button class="feed-like-button btn like-button"
+                                                                        data-post-id="{{ post.pk }}"
+                                                                        data-bs-toggle="tooltip"
+                                                                        data-bs-custom-class="custom-tooltip"
+                                                                        data-bs-placement="top" data-bs-title="Like">
+                                                                        <!--post like button-->
+                                                                        <i class="fa-solid fa-heart"></i>
+                                                                        <!--<i class="fa-regular fa-heart"></i>-->
+                                                                    </button>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <small class="text-muted-color">
+                                                                    <span id="like-count-{{ post.pk }}">12</span>
+                                                                    <!--post like counter-->
+                                                                </small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col">
+                                        <div class="card shadow h-100">
+                                            <!--post img-->
+                                            <a href="#" class="card-img-top">
+                                                <img src="https://ladywithcraft.com/cdn/shop/files/00AC5E2F-7414-4856-A795-DF1CB972BF8D.jpg?v=1682438248"
+                                                    class="card-img-top" alt="Post Image" />
+                                            </a>
+                                            <!--post body-->
+                                            <div class="card-body rounded">
+                                                <div class="d-flex h-100">
+                                                    <div class="py-2">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <a href="#">
+                                                                    <img class="feedicon"
+                                                                        src="https://cdn.picrew.me/app/image_maker/696219/icon_EZdOOG8uvorfZktG.png" />
+                                                                    <!--post user icon-->
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        class="p-2 h-100 flex-grow-1 d-flex flex-column justify-content-between">
+                                                        <div class="wowowowow">
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <a href="#">
+                                                                        <h5 class="card-title card-title-hover h5">
+                                                                            Tulips</h5> <!--post title-->
+                                                                    </a>
+                                                                    <a href="#">
+                                                                        <small class="text-body-secondary">
+                                                                            <span
+                                                                                id="feed-username">@userbeginner</span>
+                                                                            <!--post username-->
+                                                                        </small>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row row-tags">
+                                                                <div class="col">
+                                                                    <small class="text-body-secondary">
+                                                                        <span class="feed-tag-group">
+                                                                            <!--post tags= group-->
+                                                                            <a href="#">
+                                                                                <span id="feed-tag"
+                                                                                    class="feed-tag">flowers</span>
+                                                                            </a>
+                                                                        </span>
+                                                                    </small>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <small class="h7-size d-block text-muted-color">January
+                                                                    1, 2024, 10:11 AM</small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="py-2 text-center">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <span id="feed-like-icon">
+                                                                    <button class="feed-like-button btn like-button"
+                                                                        data-post-id="{{ post.pk }}"
+                                                                        data-bs-toggle="tooltip"
+                                                                        data-bs-custom-class="custom-tooltip"
+                                                                        data-bs-placement="top" data-bs-title="Like">
+                                                                        <!--post like button-->
+                                                                        <i class="fa-solid fa-heart"></i>
+                                                                        <!--<i class="fa-regular fa-heart"></i>-->
+                                                                    </button>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <small class="text-muted-color">
+                                                                    <span id="like-count-{{ post.pk }}">12</span>
+                                                                    <!--post like counter-->
+                                                                </small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col">
+                                        <div class="card shadow h-100">
+                                            <!--post img-->
+                                            <a href="#" class="card-img-top">
+                                                <img src="https://www.blingcute.com/cdn/shop/collections/20220502215217.jpg?v=1651723365"
+                                                    class="card-img-top" alt="Post Image" />
+                                            </a>
+                                            <!--post body-->
+                                            <div class="card-body rounded">
+                                                <div class="d-flex h-100">
+                                                    <div class="py-2">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <a href="#">
+                                                                    <img class="feedicon"
+                                                                        src="https://cdn.picrew.me/app/image_maker/696219/icon_EZdOOG8uvorfZktG.png" />
+                                                                    <!--post user icon-->
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        class="p-2 h-100 flex-grow-1 d-flex flex-column justify-content-between">
+                                                        <div class="wowowowow">
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <a href="#">
+                                                                        <h5 class="card-title card-title-hover h5">
+                                                                            Bag</h5> <!--post title-->
+                                                                    </a>
+                                                                    <a href="#">
+                                                                        <small class="text-body-secondary">
+                                                                            <span
+                                                                                id="feed-username">@userbeginner</span>
+                                                                            <!--post username-->
+                                                                        </small>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row row-tags">
+                                                                <div class="col">
+                                                                    <small class="text-body-secondary">
+                                                                        <span class="feed-tag-group">
+                                                                            <!--post tags= group-->
+                                                                            <a href="#">
+                                                                                <span id="feed-tag"
+                                                                                    class="feed-tag">flowers</span>
+                                                                            </a>
+                                                                        </span>
+                                                                    </small>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <small class="h7-size d-block text-muted-color">January
+                                                                    1, 2024, 10:11 AM</small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="py-2 text-center">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <span id="feed-like-icon">
+                                                                    <button class="feed-like-button btn like-button"
+                                                                        data-post-id="{{ post.pk }}"
+                                                                        data-bs-toggle="tooltip"
+                                                                        data-bs-custom-class="custom-tooltip"
+                                                                        data-bs-placement="top" data-bs-title="Like">
+                                                                        <!--post like button-->
+                                                                        <i class="fa-solid fa-heart"></i>
+                                                                        <!--<i class="fa-regular fa-heart"></i>-->
+                                                                    </button>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <small class="text-muted-color">
+                                                                    <span id="like-count-{{ post.pk }}">12</span>
+                                                                    <!--post like counter-->
+                                                                </small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col">
+                                        <div class="card shadow h-100">
+                                            <!--post img-->
+                                            <a href="#" class="card-img-top">
+                                                <img src="https://ladywithcraft.com/cdn/shop/files/00AC5E2F-7414-4856-A795-DF1CB972BF8D.jpg?v=1682438248"
+                                                    class="card-img-top" alt="Post Image" />
+                                            </a>
+                                            <!--post body-->
+                                            <div class="card-body rounded">
+                                                <div class="d-flex h-100">
+                                                    <div class="py-2">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <a href="#">
+                                                                    <img class="feedicon"
+                                                                        src="https://cdn.picrew.me/app/image_maker/696219/icon_EZdOOG8uvorfZktG.png" />
+                                                                    <!--post user icon-->
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        class="p-2 h-100 flex-grow-1 d-flex flex-column justify-content-between">
+                                                        <div class="wowowowow">
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <a href="#">
+                                                                        <h5 class="card-title card-title-hover h5">
+                                                                            Tulips</h5> <!--post title-->
+                                                                    </a>
+                                                                    <a href="#">
+                                                                        <small class="text-body-secondary">
+                                                                            <span
+                                                                                id="feed-username">@userbeginner</span>
+                                                                            <!--post username-->
+                                                                        </small>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row row-tags">
+                                                                <div class="col">
+                                                                    <small class="text-body-secondary">
+                                                                        <span class="feed-tag-group">
+                                                                            <!--post tags= group-->
+                                                                            <a href="#">
+                                                                                <span id="feed-tag"
+                                                                                    class="feed-tag">flowers</span>
+                                                                            </a>
+                                                                        </span>
+                                                                    </small>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <small class="h7-size d-block text-muted-color">January
+                                                                    1, 2024, 10:11 AM</small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="py-2 text-center">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <span id="feed-like-icon">
+                                                                    <button class="feed-like-button btn like-button"
+                                                                        data-post-id="{{ post.pk }}"
+                                                                        data-bs-toggle="tooltip"
+                                                                        data-bs-custom-class="custom-tooltip"
+                                                                        data-bs-placement="top" data-bs-title="Like">
+                                                                        <!--post like button-->
+                                                                        <i class="fa-solid fa-heart"></i>
+                                                                        <!--<i class="fa-regular fa-heart"></i>-->
+                                                                    </button>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <small class="text-muted-color">
+                                                                    <span id="like-count-{{ post.pk }}">12</span>
+                                                                    <!--post like counter-->
+                                                                </small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- copypasta end -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </section>
+
+    <!--scrolltotop-->
+    <button onclick="scrolltotop()" id="totop" title="Scroll to Top">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <!--footer-->
+    <footer class="py-4 footer-section">
+        <p class="text-center footertext" id="footerfontcolor1">
+            Reach out to us at dev.artisanai@gmail.com
+            <i class="fa-solid fa-splotch footer-splotch"></i>
+        </p>
+    </footer>
+
+    <!--scripts-->
+    <script src="../js/include.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
+        </script>
+    <script src="../js/back.js"></script>
+    <script src="../js/totop.js"></script>
+    <script src="../js/tooltips.js"></script>
+    <script src="../js/toastshow.js"></script>
+</body>
+
+</html>

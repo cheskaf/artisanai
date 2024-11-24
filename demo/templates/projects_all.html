@@ -1,0 +1,84 @@
+{% extends 'base.html' %} 
+
+{% block title %}Projects – {% endblock %}
+{% block nav2Active %}
+    <a class="nav-link active" href="{% url 'projects' %}">
+{% endblock %}
+
+
+{% block content %}
+<div class="content-wrapper d-flex justify-content-around">
+    <div class="content-wrapper-width">
+        <!--page header-->
+        <div class="container-fluid padding-0 mb-1">
+            <div class="row row-cols-1 row-cols-sm-2">
+            <div class="col">
+                <div class="py-2 d-flex justify-content-sm-start justify-content-start">
+                    <div class="page-header-title">
+                        <b>My</b> Projects
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="col d-flex justify-content-sm-end justify-content-start">
+                    <div class="py-2">
+                        <a href="{% url 'new_project' %}">
+                            <button class="btn btn-feed-style">
+                            <div class="py-2 px-3 project-btn__md project-btn-primary project-btn-fuller"><i class="fa-solid fa-folder-plus"></i> New Project</div>
+                            </button>
+                        </a>
+                    </div>
+                    <div class="p-2">
+                        <a href="{% url 'stitch_counter_rows_view' %}">
+                            <button class="btn btn-feed-style">
+                            <div class="py-2 px-3 project-btn__md project-btn-tertiary__transparent project-btn-fuller"><i class="fa-solid fa-wand-magic-sparkles"></i> Stitch Counter</div>
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        
+        <!--project grid-->    
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            {% for project, project_pk, project_image, projectUserImage in projects %}
+            <!-- project card start -->
+            <div class="col">
+                <a href="{% url 'view_project' project_id=project.pk %}">
+                    <div class="card shadow">
+                        <div class="card-body rounded">
+                            <div class="d-flex align-items-center">
+                                <div class="project-card-img overflow-hidden rounded">
+                                    <img data-src="{{ project_image.url }}" class="object-fit-cover border rounded h-100 w-100" alt="...">
+                                </div>                            
+                                <div class="d-flex flex-column p-3">
+                                    <div>
+                                        <h5 class="card-title h5 p-1">
+                                            {{ project.project_title }}
+                                        </h5>
+                                    </div>
+                                    <small class="text-body-secondary">
+                                        <span id="status-tag" class="status-tag {{ project.project_progress|slugify }}">{{ project.project_progress }}</span>
+                                    </small>
+                                    <small class="h7-size d-block text-muted-color ps-1 pt-1">Created on  {{ project.project_date }}</small>
+                                </div>   
+                            </div>                        
+                            <div class="py-2 project-description">{{ project.project_description }}</div>     
+                            <div class="pb-3">                    
+                                <span id="feed-tag" class="feed-tag" style="width:fit-content;">{{ project.project_preference }}</span>
+                            </div>                       
+                        </div>
+                    </div>
+                </a>
+            </div>        
+            <!-- project card end -->
+            {% endfor %}
+            
+        </div>
+        
+    </div>
+</div>
+<script src="/../static/js/lazyload.js"></script>
+
+{% endblock %}

@@ -1,0 +1,463 @@
+{% extends 'feed.html' %} 
+{% block title %}Post – {% endblock %}
+
+<!-- content start -->
+{% block content %}
+<div class="d-flex justify-content-around content-wrapper">
+  <div class="card viewpost-card-size">
+    <div class="row g-0 viewpost-card-row">
+      <!--post image ================================================================================================ -->
+      <div class="col-md-6">
+        <div>
+          <a id="back" href="{% url 'feed' %}" data-bs-toggle="tooltip" data-bs-custom-class="custom-tooltip" data-bs-placement="right" data-bs-title="Back" class="btn mx-2">
+            <i class="fa-solid fa-arrow-left"></i>
+          </a>
+        </div>
+
+        <!--carousel start-->
+        <div id="carouselIndicators" class="carousel slide img-cover-100">
+          <ol class="carousel-indicators">
+            {% for image in post_images %}
+                <li
+                    data-bs-target="#carouselExample"
+                    data-bs-slide-to="{{ forloop.counter0 }}"
+                    {% if forloop.first %}class="active"{% endif %}
+                ></li>
+            {% endfor %}
+        </ol>
+          <!--carousel images start-->
+          
+            <div class="carousel-inner img-cover-100">
+            <!--image 1-->
+            {% for image in post_images %}
+                <div class="carousel-item img-cover-100 active" data-bs-target="#carouselModalToggle" data-bs-toggle="modal">
+                  <img data-src="{{ image.post_image_path.url }}" class="d-block img-cover-100 rounded" alt="Post Image" />
+                </div>
+            {% endfor %}
+
+          </div>
+          <!--carousel images end-->
+
+          <!--carousel controls start-->
+          <button
+            class="carousel-control-prev"
+            type="button"
+            data-bs-target="#carouselIndicators"
+            data-bs-slide="prev"
+          >
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button
+            class="carousel-control-next"
+            type="button"
+            data-bs-target="#carouselIndicators"
+            data-bs-slide="next"
+          >
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+          <!--carousel controls end-->
+        </div>
+        <!--carousel end-->
+
+        <!-- code if no carousel - one image only
+        <img
+          src="https://crochet-news.com/wp-content/uploads/2019/12/crochet-leaf-pattern-7.png"
+          class="img-fluid rounded img-cover-100"
+          alt="..."
+        />
+        -->
+
+        <!--carousel modal end-->
+        <div
+          class="modal"
+          id="carouselModalToggle"
+          aria-hidden="true"
+          aria-labelledby="carouselModalToggleLabel"
+          tabindex="-1"
+        >
+          <div class="modal-dialog modal-dialog-centered modal-fullscreen">
+            <div class="modal-content viewpost-modal-content">
+              <div class="modal-header viewpost-modal-header">
+                <h1
+                  class="modal-title fs-5 modal-header-color"
+                  id="carouselModalToggleLabel"
+                >
+                  @{{ post_user.custom_user_id.username }}
+                </h1>
+                <button
+                  type="button"
+                  class="btn btnclose"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <i
+                    class="fa-solid fa-xmark modal-header-color"
+                    id="fa-xmark"
+                  ></i>
+                </button>
+              </div>
+              
+              <div class="modal-body">
+                <div class="carousel-inner img-cover-100">
+                  
+                  <div class="carousel-item img-cover-100 active">
+                    {% for image in post_images %}
+                    <img
+                      src="{{ image.post_image_path.url }}"
+                      class="d-block img-fluid position-absolute top-50 start-50 translate-middle viewpost-modal-image"
+                      alt="..."
+                    />
+                    {% endfor %}
+                  </div>
+                  
+                </div>
+                <button
+                  class="carousel-control-prev"
+                  type="button"
+                  data-bs-target="#carouselModalToggle3"
+                  data-bs-toggle="modal"
+                >
+                  <span
+                    class="carousel-control-prev-icon"
+                    aria-hidden="true"
+                  ></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button
+                  class="carousel-control-next"
+                  type="button"
+                  data-bs-target="#carouselModalToggle2"
+                  data-bs-toggle="modal"
+                >
+                  <span
+                    class="carousel-control-next-icon"
+                    aria-hidden="true"
+                  ></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
+              
+            </div>
+            
+          </div>
+        </div>
+        <!--carousel modal end-->
+
+
+      </div>
+
+      <!--post body ================================================================================================ -->
+      <div class="col-md-6">
+        <div class="card-body post-card-body rounded d-flex flex-column justify-content-between w-100">
+          <div class="post-top">
+            <div class="d-flex">
+              <div class="py-2">
+                <div class="row">
+                  <div class="col">
+                    <a href="{% url 'profile' username=post_user.custom_user_id.username %}"> <!--post user profile link-->
+                      <img
+                        class="feedicon {{ user_skill_level }}-color"
+                        src="{{ post_user.display_image.url }}"
+                      />
+                      <!--post usericon -->
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="p-2 flex-grow-1">
+                <div class="row">
+                  <div class="col">
+                    <!--post body header-->
+                    <div class="d-flex justify-content-between">
+                      <div>
+                        <a href="#post" class="d-block">
+                          <span class="card-title h5">{{ post.post_title }}</span>
+                          <!--post title-->
+                        </a>
+                        <a href="{% url 'profile' username=post_user.custom_user_id.username %}" class="d-block"> <!--post user profile link-->
+                          <small class="text-body-secondary">
+                            <span id="feed-username">@{{ post_user.custom_user_id.username }}</span>
+                            <!--post username-->
+                          </small>
+                        </a>
+                      </div>
+                      {% if post_user.custom_user_id.username != custom_user.username %}
+                      <button class="btn btn-feed-style" data-user-id="{{ post_user_id }}">
+                        <div class="py-2 px-3 btn-follow project-btn-secondary">
+                            {% if following %}
+                            <i class="fa-solid fa-user-minus"></i> Unfollow
+                            {% else %}
+                            <i class="fa-solid fa-user-plus"></i> Follow
+                            {% endif %}
+                        </div>
+                      </button>
+                      {% else %}
+                        <span class="profile-dropdown-group">
+                          <button type="button" data-bs-toggle="dropdown" class="btn darkcolor" aria-expanded="false">
+                            <i class="fa-solid fa-ellipsis"></i>
+                          </button>
+                          <ul class="dropdown-menu dropdown-menu-end h3-size">
+                              <li>
+                                <a href="{% url 'edit_post' post_id=post.postID %}">
+                                  <button class="dropdown-item" type="button"><i class="fa-regular fa-pen-to-square"></i> Edit</button>
+                                </a>
+                              </li>
+                              <li>
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#confirmationModal">
+                                  <button type="button" class="dropdown-item" id="deleteBtn"><i class="fa-regular fa-trash-can"></i> Delete</button>
+                                </a>
+                              </li>
+                          </ul>
+                        </span>
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!--post body section 1 start-->
+            <div class="post-body-div">
+              <small class="text-body-secondary">
+                <span class="post-body-text">
+                  <!--post description-->
+                  {{ post.post_description }}
+                </span>
+              </small>
+            </div>
+            <!--post body section 1 end-->
+
+            <div class="container-fluid">
+              <div class="row py-1">
+                <div class="col-5 padding-0">
+                  <small>
+                    <label class="form-label label__sm">Difficulty</label>
+                    <span id="difficulty" class="difficulty-group">
+                      <span> 
+                        <span id="feed-tag" class="feed-tag">{{ post.post_skill_level }}</span>
+                      </span>
+                    <span>
+                  </small>
+                </div>
+              </div>
+              <div class="row py-1">
+                <div class="col padding-0">
+                  <small>
+                    <label class="form-label label__sm">Tags </label>
+                    <!--project tags start-->
+                    <span class="feed-tag-group">
+                      {% for pref in post.post_preference %}
+                        <a href="/browse/{{ pref }}">
+                          <span id="feed-tag" class="feed-tag">{{ pref }}</span>
+                        </a>
+                      {% endfor %}
+                    </span>
+                    <!--project tags end--> 
+                  </small>
+                </div>
+              </div>
+              <hr>
+              <div class="row py-1">
+                <div class="col d-flex justify-content-center padding-0">
+                  <small>
+                    <label class="form-label label__sm">
+                      Posted on 
+                      <span>
+                        {{ post.posted_date }}
+                      </span>                    
+                    </label>
+                  </small>
+                </div>
+              </div>
+              <hr>
+            </div>
+          </div>
+          <!--post controls start-->
+          <div class="py-2 text-center control-div">
+            <div class="row">
+              <div class="col">
+                <span id="feed-like-icon" class="post-control-icon">
+                  <button class="feed-like-button btn like-button" data-post-id="{{ post.pk }}"> <!--post like button-->
+                    {% if like_post %}    
+                        <i class="fa-solid fa-heart"></i>
+                    {% else %}
+                        <i class="fa-regular fa-heart"></i>
+                    {% endif %}
+                </button>
+                </span>
+              </div>
+              <div class="col">
+                <span id="feed-like-icon" class="post-control-icon">
+                  <button class="feed-like-button btn" id="copy-button">
+                      <!--post share button-->
+                      <i class="fa-solid fa-share-nodes"></i>
+                    </button>
+                </span>
+              </div>
+              
+            </div>
+            <div class="row">
+              <div class="col">
+                <small class="text-body-secondary">
+                  <span class="post-control-small" id="like-count-{{ post.pk }}">
+                    {{ like_counts }}
+                    </span> 
+                  <!--post like counter-->
+                </small>
+              </div>
+              <div class="col">
+                <small class="text-body-secondary">
+                  <span class="post-control-small">Share</span>
+                </small>
+              </div>
+            </div>
+          </div>
+          <!--post controls end-->
+        </div>
+      </div>
+      <!--post body end-->
+    </div>
+  </div>
+</div>
+
+<!-- Modal for confirmation -->
+<div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="d-flex justify-content-end align-items-center mx-2">        
+        <button
+            type="button"
+            class="btn btnclose"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          >
+            <i
+              class="fa-solid fa-xmark modal-header-color"
+              id="fa-xmark"
+            ></i>
+          </button>
+      </div>
+      
+      <div class="modal-body" id="newRowModal-body">        
+        <div class="container">
+          <div class="row" id="newRowModal-row">
+            <span class="modal-title mt-2 ps-2 text-center my-1">
+              <b>Are you sure you want to delete this post?</b>
+            </span>
+            <p class="text-center my-1 h5-size">
+              This action cannot be undone.
+            </p>
+          </div>
+        </div>
+        
+        <div class="col d-flex justify-content-center pt-2 pb-4">
+          <div class="py-2">
+            <button class="btn pe-1" class="btn btnclose" data-bs-dismiss="modal" aria-label="Close">
+              <div class="py-2 px-3 project-btn__md project-btn-tertiary__transparent project-btn-full">Cancel</div>
+            </button>
+            <form id="deleteForm" action="{% url 'delete_post' post_id=post.pk %}" method="post" style="display: inline;">
+              {% csrf_token %}
+              <input type="hidden" name="post_id" value="{{ post.pk }}">
+              <button type="submit" class="btn ps-0 ms-0">
+                <div class="py-2 px-3 project-btn__md project-btn-primary project-btn-full">Delete</div>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/../static/js/lazyload.js"></script>
+
+{% endblock %}
+<!-- content end -->
+
+{% block scripts %}
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="/../static/js/clipboard.js"></script>
+<script>
+  // copy to clipboard
+  var shareableLink = "{{ shareable_link }}";
+
+  document.getElementById("copy-button").addEventListener("click", function() {
+    copyToClipboard(shareableLink);
+    showToast("Link copied to clipboard!");
+  });
+
+  function getCookie(name) {
+      var cookieValue = null;
+      if (document.cookie && document.cookie !== '') {
+          var cookies = document.cookie.split(';');
+          for (var i = 0; i < cookies.length; i++) {
+              var cookie = cookies[i].trim();
+              if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                  cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                  break;
+              }
+          }
+      }
+      return cookieValue;
+  }
+  // copy to clipboard end
+
+  // like/unlike post
+  $(document).ready(function() {
+    $('.like-button').click(function() {
+      var postId = $(this).data('post-id');
+      var button = $(this);
+
+      $.ajax({
+        url: '{% url 'like_unlike_post' %}',
+        method: 'POST',
+        data: {
+          'post_id': postId,
+          'csrfmiddlewaretoken': '{{ csrf_token }}'
+        },
+        success: function(response) {
+          var icon = button.find('i');
+          if (response.status == 'liked') {
+            icon.removeClass('fa-regular fa-heart').addClass('fa-solid fa-heart');
+          } else if (response.status == 'unliked') {
+              icon.removeClass('fa-solid fa-heart').addClass('fa-regular fa-heart');
+            }
+
+          $('#like-count-' + postId).text(response.like_count);
+        }
+      });
+    });
+  });
+
+  // follow/unfollow user
+  $(document).ready(function() {
+      $('.btn-feed-style').click(function(event) {
+          event.preventDefault();  // Prevent the form submission
+
+          var userId = $(this).data('user-id');  // Ensure 'user-id' matches the attribute name
+          var button = $(this);
+          var innerDiv = button.find('.btn-follow');
+
+          $.ajax({
+              url: '{% url 'follow_unfollow' %}',
+              method: 'POST',
+              data: {
+                  'user_id': userId,
+                  'csrfmiddlewaretoken': '{{ csrf_token }}'
+              },
+              success: function(response) {
+                  if (response.status == 'followed') {
+                      innerDiv.html('<i class="fa-solid fa-user-minus"></i> Unfollow');
+                  } else if (response.status == 'unfollowed') {
+                      innerDiv.html('<i class="fa-solid fa-user-plus"></i> Follow');
+                  }
+              }
+          });
+      });
+  });
+</script>
+{% endblock %}
+
+

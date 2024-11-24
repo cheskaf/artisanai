@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#2E9FA2"/>
+    <meta name="description" content="The ultimate crafting companion! Share, challenge, and organize your crochet projects and materials, all in one convenient platform. Embrace creativity with ease, anytime, anywhere!">
+    <title>{% block title %}{% endblock %}ArtisanAI</title>
+
+    {% load static %}
+
+    <!-- Other common head elements here -->
+    <!-- Manifest file for PWA -->
+    <link rel="manifest" href="{% static 'manifest.json' %}">
+    <!-- favicon -->
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/png" />
+    <!-- bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
+    <!-- fontawesome -->
+    <script src="https://kit.fontawesome.com/03977197ef.js" crossorigin="anonymous"></script>
+    <!-- styles -->    
+    <link href="{% static 'css/include.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/themes.css' %}" rel="stylesheet" />
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+    {% block styles %}{% endblock %}    
+</head>
+<body>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('{% static "js/serviceworker.js" %}')
+                    .then(function(registration) {
+                        console.log('Service Worker registered with scope:', registration.scope);
+                    })
+                    .catch(function(error) {
+                        console.error('Service Worker registration failed:', error);
+                    });
+            });
+        }
+    </script>
+    <!-- Common page elements here -->  
+    
+    <!--header-->
+    <nav class="navbar sticky-top">
+        <div class="container-fluid">
+            <!--toggle-->
+            {% block burgericon %}             
+            <button class="navbar-toggler me-4" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+                aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                <i class="fas fa-bars" title="Menu"></i>
+            </button>
+            {% endblock %}    
+            <!--brand-->
+            <a class="navbar-brand" href="#">
+                <span class="brand-ai">
+                    <span class="brand-artisan"> <span class="color1">A</span><span class="color2">r</span><span class="color3">t</span><span class="color1">i</span><span class="color2">s</span><span class="color3">a</span><span class="color1">n</span><span class="color2 brand-ai">AI</span></span>
+                </span>
+            </a>
+            
+            {% block navright %}
+            <div>               
+                <span class="profile-dropdown-group">
+                    <button type="button" class="btn profilebtn usericonframe" data-bs-toggle="dropdown" aria-expanded="false">
+                        {% if user_display_image != None %}
+                        <a class="profile" href="#" title="Profile"> <!-- add URL -->
+                            <img id="usericon" class="object-fit-cover" data-src="{{ user_display_image.url }}" />
+                        </a>
+                        {% else %}
+                        <div class="col userimgcontainer" title="Profile"> <!-- mt-3-->
+                            <img id="usericon" class="object-fit-cover" src="/../static/images/defaultuser.jpg" />
+                        </div>
+                        {% endif %}
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end h3-size">
+                        <li>
+                            <a href="{% url 'profile' %}">
+                                <button class="dropdown-item" type="button"><i class="fa-solid fa-user drop-icon"></i> Profile</button>
+                            </a>
+                        </li>
+                        <!--<li>
+                            <a href="/#">
+                                <button class="dropdown-item" type="button"><i class="fa-solid fa-bell drop-icon"></i> Notifications</button>
+                            </a>
+                        </li>-->
+                        <li>
+                            <a href="#">
+                                <button class="dropdown-item" type="button"><i class="fa-solid fa-gear drop-icon"></i> Settings</button>
+                            </a>
+                        </li>
+                        <hr class="sidebar-divider m-1" />
+                        <li>
+                            <a href="#">
+                            <button class="dropdown-item" type="button"><i class="fa-solid fa-right-from-bracket drop-icon"></i> Logout</button>
+                            </a>
+                        </li>
+                    </ul>
+                </span>
+            </div>
+            {% endblock %}
+            {% block navleft %}
+            <!--sidebar-->
+            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header">
+                    <button class="btn btnclose" type="button" data-bs-dismiss="offcanvas" aria-label="Close" title="Close">
+                        <i class="fa-solid fa-xmark" id="fa-xmark"></i>
+                    </button>
+                    <a href="{% url 'browse' %}">
+                        <button class="btn btnnotif" type="button" aria-label="Browse" title="Browse">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </a>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <!--sidebrand-->
+                        <div class="d-flex justify-content-center mb-30">
+                            <span class="brand-sidebar brand-ai">
+                                <i class="fa-solid fa-splotch brand-splotch colorsplotch"></i>
+                                <span class="brand-artisan"> <span class="color4">A</span><span class="color5">r</span><span class="color6">t</span><span class="color4">i</span><span class="color5">s</span><span class="color6">a</span><span class="color4">n</span><span class="color5 brand-ai">AI</span></span>
+                            </span>
+                        </div>
+                        <!--sidelinks-->
+                        <div class="section-navlink">
+                            <li class="nav-item">
+                                {% block nav1Active %} <!--add active class-->
+                                <a class="nav-link" href="#">
+                                {% endblock %}
+                                    <span>
+                                        <i class="fa-solid fa-house navicon navicon1"></i>
+                                        <span class="navname">Home<span>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                {% block nav3Active %}
+                                <a class="nav-link" href="#">
+                                {% endblock %}
+                                    <span>
+                                        <i class="fa-solid fa-book-bookmark navicon navicon3"></i>
+                                        <span class="navname">Library<span>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                {% block nav4Active %}
+                                <a class="nav-link" href="#">
+                                {% endblock %}
+                                    <span>
+                                        <i class="fa-solid fa-chart-simple navicon navicon4"></i>
+                                        <span class="navname">Challenges<span>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="nav-item mb-30">
+                                {% block nav2Active %}
+                                <a class="nav-link" href="#">
+                                {% endblock %}
+                                    <span>
+                                        <i class="fa-solid fa-box-archive navicon navicon2"></i>
+                                        <span class="navname">Projects<span>
+                                    </span>
+                                </a>
+                            </li>
+                            
+                        </div>
+
+                        <!-- themes -->
+                        <div class="d-flex justify-content-center label-sm">Theme</div>
+                        <div class="d-flex justify-content-center">
+                            <select id="themeSelect" style="font-family:'Verdana'">
+                                <option value="light" data-mode="light" style="font-family:'Verdana';">🌤️ light
+                                </option>
+                                <option value="dark" style="font-family:'Verdana'">🌙 dark</option>
+                                <option value="newyear" style="font-family:'Verdana'">🎆 new year</option>
+                                <option value="valentines" style="font-family:'Verdana'">💘 valentine's</option>
+                                <option value="pride" style="font-family:'Verdana'">🌈 pride</option>
+                                <option value="halloween" style="font-family:'Verdana'">🎃 halloween</option>
+                                <option value="christmas" style="font-family:'Verdana'">🎄 christmas</option>                                
+                            </select>
+                        </div>
+                    </ul>
+                    {% block modmenu %}{% endblock %}
+                </div>
+            </div>
+            {% endblock %}
+        </div>
+    </nav>  
+    
+    {% block floatingnav %}
+    <!--floating navicons-->
+    <div class="position-relative d-none d-xl-block">
+        <div class="position-fixed d-flex justify-content-center align-items-center floating-nav-container">
+            <div class="floating-nav-group">
+                <li class="nav-item px-2 py-3">         
+                    <a href="{% url 'feed' %}" data-bs-toggle="tooltip" data-bs-custom-class="custom-tooltip" data-bs-placement="right" data-bs-title="Home">
+                        <i class="fa-solid fa-house floating-navicon navicon1"></i>
+                    </a>
+                </li>
+                <li class="nav-item px-2 py-3"> 
+                    <a href="#" data-bs-toggle="tooltip" data-bs-custom-class="custom-tooltip" data-bs-placement="right" data-bs-title="Library">
+                        <i class="fa-solid fa-book-bookmark floating-navicon navicon3"></i>
+                    </a>           
+                </li>
+                <li class="nav-item px-2 py-3">  
+                    <a href="#" data-bs-toggle="tooltip" data-bs-custom-class="custom-tooltip" data-bs-placement="right" data-bs-title="Challenges">
+                        <i class="fa-solid fa-chart-simple floating-navicon navicon4"></i>
+                    </a>        
+                </li>
+                <li class="nav-item px-2 py-3">
+                    <a href="#" data-bs-toggle="tooltip" data-bs-custom-class="custom-tooltip" data-bs-placement="right" data-bs-title="Projects">
+                        <i class="fa-solid fa-box-archive floating-navicon navicon2"></i>
+                    </a>
+                </li>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+    
+    <!--content-->
+    {% block section %}        
+    <section class="section-content">        
+        {% block content %}
+        {% endblock %}
+    </section>
+    {% endblock %}
+    
+    {% block toast %}        
+        <!-- toast -->
+        <div class="toast-container position-fixed top-0 start-50 translate-middle-x p-3">
+            <div id="liveToast" class="toast" role="alert" aria-live="polite" aria-atomic="true" data-bs-delay="3000" style="color: var(--light);background-color: var(--accent2); border: 1px solid var(--light); font-weight:600;">
+                <div class="d-flex w-100 text-center align-items-center justify-content-center">
+                    <div class="toast-body text-center align-items-center justify-content-center" id="toastBody">     
+                        {% for message in messages %}  
+                            <script>
+                                document.addEventListener('DOMContentLoaded', function () {
+                                    showToast("{{ message }}");  // Show the first message, modify as needed
+                                    console.log("{{ message }}");
+                                });
+                            </script>                                                      
+                            {{ message }}                            
+                        {% endfor %}                    
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
+        <!-- toast end -->
+    {% endblock %}
+    
+    <!--scrolltotop-->
+    <button onclick="scrolltotop()" id="totop" title="Scroll to Top">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+    
+    <!--footer-->
+    <footer class="py-4 footer-section">
+        <p class="text-center footertext" id="footerfontcolor1">
+            Reach out to us at dev.artisanai@gmail.com
+            <i class="fa-solid fa-splotch footer-splotch"></i>
+        </p>
+    </footer>
+
+    <!--scripts-->
+    <script src="{% static 'js/include.js' %}"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
+    </script>
+    <script src="/../static/js/back.js"></script>
+    <script src="/../static/js/totop.js"></script>
+    <script src="/../static/js/tooltips.js"></script>
+    <script src="/../static/js/toastshow.js"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

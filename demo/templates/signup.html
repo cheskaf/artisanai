@@ -1,0 +1,130 @@
+
+{% extends "base.html" %}
+{% load static %}
+
+{% block styles %}<link href="{% static 'css/base.css' %}" rel="stylesheet" />{% endblock %}   
+
+{% block navright %}
+<div id="navbarRightCollapse">
+  <a href="{% url 'login' %}">
+      <button class="btn login-btn-header">
+          Log In
+      </button>
+  </a>
+</div>
+{% endblock %} 
+
+{% block navleft %}{% endblock %}
+{% block burgericon %}{% endblock %}
+{% block floatingnav %}{% endblock %}
+
+{% block title %}Sign Up – {% endblock %}
+
+{% block section %}        
+<section class="section-content d-flex justify-content-center align-items-center">        
+    {% block content %}
+    <div class="content-wrapper d-flex justify-content-center align-items-center loginsignup-wrapper">
+      <div class="card-loginsignup">
+        <div class="card card-body-loginsignup p-4">
+          <div class="container py-2">
+            <h2 class="my-4 text-center guestheader"><b>Sign</b> Up</h2>
+            <form method="post" action="{% url 'signup' %}">
+              {% csrf_token %}
+              <!-- Add your form fields here -->
+              <div class="form-group my-2">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" pattern="[a-zA-Z0-9]+" class="form-style" value="{{ submitted_values.username }}" maxlength="100" required>
+              </div>
+              <div class="form-group my-2">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" class="form-style" value="{{ submitted_values.email }}" 
+                        {% if email_error %}style="border: 3px solid var(--errormark)"{% endif %}
+                        required>
+                                         
+                {% if email_error %}
+                <error-message class="error-message-sm mt-4">{{ email_error }}</error-message>
+                {% endif %}
+              </div>
+              <div class="form-group my-2">
+                <label for="password">Password</label>
+                <div class="d-flex align-items-center">
+                  <input type="password" id="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" name="password" class="form-style" value="{{ submitted_values.password }}" maxlength="100" required>
+                  <i class="pw-toggle fa-regular fa-eye-slash" id="togglePassword"></i>
+                </div>
+              </div>
+              <div class="form-group my-2">
+                <label for="password">Confirm Password</label>
+                <div class="d-flex align-items-center">
+                  <input type="password" id="confirm_password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" name="confirm_password" class="form-style" value="{{ submitted_values.password }}" maxlength="100" required>
+                  <i class="pw-toggle fa-regular fa-eye-slash" id="togglePassword2"></i>
+                </div>
+              </div>
+              
+              
+              <div id="message" class="py-4 mt-4">
+                <div class="row py-2">
+                  <div class="col text-center">
+                    <p>Password must contain the following:</p>
+                  </div>
+                </div>
+                <div class="row py-1">    
+                  <div class="col-3 password-icon">
+                    <i class="fa-solid fa-check valid" id="valid-icon-letter"></i>
+                    <i class="fa-solid fa-xmark invalid" id="invalid-icon-letter"></i>
+                  </div>          
+                  <div class="col">
+                    <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
+                  </div>
+                </div>
+                <div class="row py-1">    
+                  <div class="col-3 password-icon">
+                    <i class="fa-solid fa-check valid" id="valid-icon-capital"></i>
+                    <i class="fa-solid fa-xmark invalid" id="invalid-icon-capital"></i>
+                  </div>          
+                  <div class="col">
+                    <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
+                  </div>
+                </div>
+                <div class="row py-1">    
+                  <div class="col-3 password-icon">
+                    <i class="fa-solid fa-check valid" id="valid-icon-number"></i>
+                    <i class="fa-solid fa-xmark invalid" id="invalid-icon-number"></i>
+                  </div>          
+                  <div class="col">
+                    <p id="number" class="invalid">A <b>number</b></p>
+                  </div>
+                </div>
+                <div class="row py-1">    
+                  <div class="col-3 password-icon">
+                    <i class="fa-solid fa-check valid" id="valid-icon-length"></i>
+                    <i class="fa-solid fa-xmark invalid" id="invalid-icon-length"></i>
+                  </div>          
+                  <div class="col">
+                    <p id="length" class="invalid">A minimum of <b>8 characters</b></p>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Placeholder for error message -->
+              {% if error_message %}
+              <small class="error-message mt-3">{{ error_message }}</small>
+              {% endif %}
+        
+              <!-- Add more form fields as needed -->
+              <button type="submit" class="project-btn-secondary modal-btn-full py-2 mt-2">Sign Up</button>
+            </form>
+            <div class="form-group text-center my-4">
+              <label>Already have an account?</label> <a href="{% url 'user_login' %}">Log In</a>
+            </div>
+          </div>      
+        </div>  
+      </div>
+    </div>
+    {% endblock %}
+</section>
+{% endblock %}
+ 
+{% block scripts %}
+<script src="{% static 'js/signup.js' %}"></script>
+<script src="{% static 'js/togglepw.js' %}"></script>
+{% endblock %}

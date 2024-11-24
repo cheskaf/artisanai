@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+
+{% block title %}Settings – {% endblock %}
+
+<!-- content start -->
+{% block content %}
+<div class="content-wrapper d-flex justify-content-around">
+  <!--feed toggle buttons-->
+    <div class="content-wrapper-width__md">
+        <div class="d-flex justify-content-center align-items-center">    
+            <p class="mb-2"><b>Settings</b></p>
+        </div>
+            
+        <div class="row row-cols-1 g-2">
+            <div class="col">
+                <a href="{% url 'profileedit' %}">
+                    <div class="card h-100">
+                        <div class="card-body__notif rounded">
+                            <div class="d-flex align-items-start">
+                                <div>
+                                    <div class="row h-100 p-0">
+                                        <div class="col me-2 px-2">
+                                            <div class="library-icon accent-4-bg d-flex justify-content-center align-items-center">
+                                                <i class="fa-solid fa-user"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <div class="row">
+                                        <div class="col px-3 library-item align-items-center">
+                                            <p><b>Edit Profile</b></p>
+                                            <p>Change your display name, bio, icon, social links, preferences, skill level</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="col">
+                <a href="{% url 'change_password' %}">
+                    <div class="card h-100">
+                        <div class="card-body__notif rounded">
+                            <div class="d-flex align-items-center">
+                                <div>
+                                    <div class="row h-100 p-0">
+                                        <div class="col me-2 px-2">
+                                            <div class="library-icon accent-4-bg d-flex justify-content-center align-items-center">
+                                                <i class="fa-solid fa-lock"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <div class="row">
+                                        <div class="col px-3 library-item align-items-center">
+                                            <p><b>Change Password</b></p>
+                                            <p>Change your password</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            
+            <!--<hr>
+            
+            <div class="col">
+                <a href="#">
+                    <div class="card h-100">
+                        <div class="card-body__notif rounded">
+                            <div class="d-flex align-items-center">
+                                <div>
+                                    <div class="row h-100 p-0">
+                                        <div class="col me-2 px-2">
+                                            <div class="library-icon accent-4-bg d-flex justify-content-center align-items-center">
+                                                <i class="fa-solid fa-id-card-clip"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <div class="row">
+                                        <div class="col px-3 library-item align-items-center">
+                                            <p><b>Apply as moderator</b></p>
+                                            <p>Submit an application</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>-->
+            
+        </div> 
+    </div>
+</div>
+<script src="/../static/js/lazyload.js"></script>
+{% endblock %}
+<!-- content end -->
